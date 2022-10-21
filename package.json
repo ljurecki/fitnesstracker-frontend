@@ -1,19 +1,11 @@
 {
-<<<<<<< HEAD
-  "name": "univ_fitnesstrackr_frontend",
-=======
   "name": "fitness-trackr-frontend",
->>>>>>> d4c4485c8b1ee7452b7f6c3c9e9444a39e4466fc
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-<<<<<<< HEAD
-    "test": "echo \"Error: no test specified\" && exit 1"
-=======
     "start": "react-scripts start",
     "build": "react-scripts build"
->>>>>>> d4c4485c8b1ee7452b7f6c3c9e9444a39e4466fc
   },
   "keywords": [],
   "author": "",
@@ -25,5 +17,17 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.4.2",
     "react-scripts": "^5.0.1"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
