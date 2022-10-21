@@ -1,1 +1,2 @@
-export { default as /* name */ } from './';
+export { default as LoginForm } from './LoginForm';
+export { default as RegisterForm } from './RegisterForm';
