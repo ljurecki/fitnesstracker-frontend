@@ -1,5 +1,5 @@
-// const BASE_URL = 'https://young-mountain-90825.herokuapp.com/api';
-const BASE_URL = 'http://fitnesstrac-kr.herokuapp.com/api';
+const BASE_URL = 'https://young-mountain-90825.herokuapp.com/api';
+// const BASE_URL = 'http://fitnesstrac-kr.herokuapp.com/api';
 
 const createHeaders = jwt => {
   return jwt
@@ -19,8 +19,8 @@ export const login = async (username, password) => {
       method: 'POST',
       headers: headers,
       body: JSON.stringify({
-        username: 'asd',
-        password: 'asd2',
+        username,
+        password,
       }),
     }).then(response => response.json());
   } catch (err) {
