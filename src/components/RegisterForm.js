@@ -18,7 +18,7 @@ const RegisterForm = () => {
   }
 
   return (
-    <form id="forms" onSubmit={(event) => {
+    <Form id="forms" onSubmit={(event) => {
       event.preventDefault();
       registerUser();
     }}>
@@ -46,7 +46,7 @@ const RegisterForm = () => {
         Submit
       </Button>
 
-    </form>
+    </Form>
 
   )
 

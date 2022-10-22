@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { createActivity } from '../api';
 
-const createActivity = () => {
+const CreateActivity = () => {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const newActivity = {
@@ -16,7 +16,7 @@ const createActivity = () => {
     }
 
     return (
-        <form id="forms" onSubmit={(event) => {
+        <Form id="forms" onSubmit={(event) => {
             event.preventDefault();
             addActivity();
         }}>
@@ -41,7 +41,7 @@ const createActivity = () => {
                 Submit
             </Button>
 
-        </form>
+        </Form>
 
     )
 
@@ -49,4 +49,4 @@ const createActivity = () => {
 
 
 
-export default RegisterForm;
+export default CreateActivity;
