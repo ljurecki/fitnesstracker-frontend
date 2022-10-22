@@ -62,10 +62,10 @@ const App = () => {
             path='/activities'
             element={<Activities /* user={user} */ />}
           />
-          {/* <Route
+          <Route
             path='/register'
-            element={<Register setJwt={setJwt} navigate={navigate} />}
-          /> */}
+            element={<Register /* setJwt={setJwt} navigate={navigate} */ />}
+          />
           <Route
             path='/login'
             element={<Login /* setJwt={setJwt} navigate={navigate} */ />}

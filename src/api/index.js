@@ -4,12 +4,12 @@ const BASE_URL = 'https://young-mountain-90825.herokuapp.com/api';
 const createHeaders = jwt => {
   return jwt
     ? {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${jwt}`,
-      }
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${jwt}`,
+    }
     : {
-        'Content-Type': 'application/json',
-      };
+      'Content-Type': 'application/json',
+    };
 };
 
 export const login = async (username, password) => {
@@ -27,3 +27,25 @@ export const login = async (username, password) => {
     console.error(err);
   }
 };
+
+
+export const register = async (username, password) => {
+  try {
+    const response = await fetch(`${baseURL}/users/register`, {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        user: {
+          username: username,
+          password: password
+        }
+      })
+    })
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.log(err)
+  }
+}
