@@ -59,17 +59,14 @@ const App = () => {
             element={<EditRoutine user={user} navigate={navigate} jwt={jwt} />}
           /> */}
           <Route
-<<<<<<< HEAD
-=======
             path='/activities'
             element={<Activities /* user={user} */ />}
           />
-          {/* <Route
-            path='/register'
-            element={<Register setJwt={setJwt} navigate={navigate} />}
-          /> */}
           <Route
->>>>>>> 0aace060cac5adb1523a26a37789304f04a0965e
+            path='/register'
+            element={<Register /* setJwt={setJwt} navigate={navigate} */ />}
+          />
+          <Route
             path='/login'
             element={<Login /* setJwt={setJwt} navigate={navigate} */ />}
           />

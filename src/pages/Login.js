@@ -8,7 +8,8 @@ const Login = () => {
     <>
       <h1>Login</h1>
       {showRegistration ? <RegisterForm /> : <LoginForm />}
-    </>
+      {/* {showRegistration ? <LoginForm /> : <RegisterForm />}  */}
+    </>// to test register form
   );
 };
 
