@@ -1,7 +1,6 @@
 import React from 'react';
 import { Container } from 'react-bootstrap';
 import { RegisterForm } from '../components';
-import { Container } from 'react-bootstrap';
 
 const Register = ({ navigate }) => {
   return (

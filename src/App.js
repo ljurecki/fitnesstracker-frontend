@@ -39,9 +39,6 @@ const App = () => {
     setActivities(results.data.activities);
 }
 
-  // useEffect(() => {
-  //   persistLogin();
-  // }, [jwt]);
   useEffect(() => {
     persistLogin();
   }, [jwt]);
@@ -71,7 +68,7 @@ const App = () => {
           /> */}
           <Route
             path='/activities'
-            element={<Activities /* user={user} */ />}
+            element={<Activities activities={Activities} fetchActivities={fetchActivities} /* user={user} */ />}
           />
           <Route path='/register' element={<Register navigate={navigate} />} />
           <Route
