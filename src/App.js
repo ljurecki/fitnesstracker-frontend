@@ -7,6 +7,7 @@ const App = () => {
   const [jwt, setJwt] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState({});
+  const [activities, setActivities] = useState({});
   const navigate = useNavigate();
 
   function logOut() {
@@ -30,6 +31,11 @@ const App = () => {
     //   }
     // }
   }
+
+  async function fetchActivities() {
+    const results = await getAllActivities(jwt)
+    setActivities(results.data.activities);
+}
 
   // useEffect(() => {
   //   persistLogin();

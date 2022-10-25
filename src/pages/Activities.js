@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Activities = () => {
+const Activities = ({fetchActivities}) => {
 
 
   return <div>
