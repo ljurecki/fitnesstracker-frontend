@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
-import { Home, Login, Routines, Activities } from './pages';
+import { Home, Login, Routines, Activities, Register } from './pages';
 
 const App = () => {
   const [jwt, setJwt] = useState('');
@@ -64,7 +64,7 @@ const App = () => {
           />
           <Route
             path='/register'
-            element={<Register /* setJwt={setJwt} navigate={navigate} */ />}
+            element={<Register setJwt={setJwt} navigate={navigate} />}
           />
           <Route
             path='/login'

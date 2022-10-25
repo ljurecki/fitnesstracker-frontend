@@ -2,26 +2,27 @@ import React, { useState } from 'react';
 import { register } from '../api';
 import { Form, Button } from 'react-bootstrap';
 
-const RegisterForm = () => {
-
+const RegisterForm = ({ navigate, setJwt }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   const registerUser = async () => {
     const results = await register(username, password);
-    // if (results.success) {
-    //   setToken(results.data.token);
-    //   window.localStorage.setItem('token', results.data.token);
-    // navigate('/profile'); // Navigation once register is complete
-    // } else {
-    console.log(results.error.message)
-  }
+    if (results.token) {
+      console.log('Success');
+      setJwt(results.token);
+      window.localStorage.setItem('jwt', results.token);
+      navigate('/');
+    }
+  };
 
   return (
-    <Form id="forms" onSubmit={(event) => {
-      event.preventDefault();
-      registerUser();
-    }}>
+    <Form
+      id='forms'
+      onSubmit={event => {
+        event.preventDefault();
+        registerUser();
+      }}>
       <Form.Group className='mb-3'>
         <Form.Label>Create Username</Form.Label>
         <Form.Control
@@ -45,13 +46,8 @@ const RegisterForm = () => {
       <Button variant='primary' type='submit'>
         Submit
       </Button>
-
     </Form>
-
-  )
-
+  );
 };
-
-
 
 export default RegisterForm;
