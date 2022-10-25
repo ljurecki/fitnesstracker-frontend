@@ -2,19 +2,20 @@ import React, { useState } from 'react';
 import { register } from '../api';
 import { Form, Button } from 'react-bootstrap';
 
-const RegisterForm = ({ navigate, setJwt }) => {
+const RegisterForm = ({ navigate }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   const registerUser = async () => {
     const results = await register(username, password);
-    if (results.token) {
-      console.log('Success');
-      setJwt(results.token);
-      window.localStorage.setItem('jwt', results.token);
-      navigate('/');
+    if (!results.error) {
+      navigate('/login');
+    } else {
+      console.error(results.error);
     }
   };
+
+  //Show success on register, then redirect after 3 seconds
 
   return (
     <Form
@@ -45,6 +46,9 @@ const RegisterForm = ({ navigate, setJwt }) => {
       </Form.Group>
       <Button variant='primary' type='submit'>
         Submit
+      </Button>
+      <Button variant='secondary' onClick={() => navigate('/login')}>
+        Cancel
       </Button>
     </Form>
   );

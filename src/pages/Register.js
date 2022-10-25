@@ -1,17 +1,14 @@
 import React from 'react';
+import { Container } from 'react-bootstrap';
 import { RegisterForm } from '../components';
 import { Container } from 'react-bootstrap';
 
-const Register = ({ navigate, setJwt }) => {
-  
+const Register = ({ navigate }) => {
   return (
-    <>
     <Container>
       <h1>Register Here</h1>
-      <RegisterForm navigate={navigate} setJwt={setJwt} />
-      
-      </Container>
-    </>
+      <RegisterForm navigate={navigate} />
+    </Container>
   );
 };
 
