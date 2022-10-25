@@ -2,14 +2,23 @@ import React, { useState } from 'react';
 import { login } from '../api';
 import { Form, Button } from 'react-bootstrap';
 
-const LoginForm = () => {
+const LoginForm = ({ navigate, setJwt }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   const loginUser = async () => {
     const result = await login(username, password);
-
-    console.log(result);
+    if (!result.error) {
+      if (result.token) {
+        setJwt(result.token);
+        window.localStorage.setItem('jwt', result.token);
+        navigate('/');
+      } else {
+        console.error('No token returned from server');
+      }
+    } else {
+      console.error(result.error);
+    }
   };
 
   return (
@@ -26,9 +35,6 @@ const LoginForm = () => {
             setUsername(e.target.value);
           }}
         />
-        <Form.Text className='text-muted'>
-          We'll never share your email with anyone else.
-        </Form.Text>
       </Form.Group>
 
       <Form.Group className='mb-3'>
@@ -43,6 +49,9 @@ const LoginForm = () => {
       </Form.Group>
       <Button variant='primary' type='submit'>
         Submit
+      </Button>
+      <Button variant='success' onClick={() => navigate('/register')}>
+        Register
       </Button>
     </Form>
   );

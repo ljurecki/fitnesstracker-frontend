@@ -1,15 +1,13 @@
 import React, { useState } from 'react';
-import { RegisterForm, LoginForm } from '../components';
+import { Container } from 'react-bootstrap';
+import { LoginForm } from '../components';
 
-const Login = () => {
-  const [showRegistration, setShowRegistration] = useState(false);
-
+const Login = ({ navigate, setJwt }) => {
   return (
-    <>
+    <Container>
       <h1>Login</h1>
-      {showRegistration ? <RegisterForm /> : <LoginForm />}
-      {/* {showRegistration ? <LoginForm /> : <RegisterForm />}  */}
-    </>// to test register form
+      <LoginForm navigate={navigate} setJwt={setJwt} />
+    </Container>
   );
 };
 
