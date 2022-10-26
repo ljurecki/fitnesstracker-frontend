@@ -34,10 +34,10 @@ const App = () => {
     }
   }
 
-  async function fetchActivities() {
-    const results = await getAllActivities(jwt)
-    setActivities(results.data.activities);
-}
+//   async function fetchActivities() {
+//     const results = await getAllActivities(jwt)
+//     setActivities(results.data.activities);
+// }
 
   useEffect(() => {
     persistLogin();
@@ -68,7 +68,7 @@ const App = () => {
           /> */}
           <Route
             path='/activities'
-            element={<Activities activities={Activities} fetchActivities={fetchActivities} /* user={user} */ />}
+            element={<Activities activities={Activities} /* user={user} */ />}
           />
           <Route path='/register' element={<Register navigate={navigate} />} />
           <Route

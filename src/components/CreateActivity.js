@@ -27,14 +27,18 @@ const CreateActivity = () => {
         <Form.Control
           placeholder='Enter Name'
           onChange={e => {
-            setUsername(e.target.value);
+            setName(e.target.value);
           }}
         />
       </Form.Group>
 
       <Form.Group className='mb-3'>
         <Form.Label>Description</Form.Label>
-        <Form.Control placeholder='Enter Description' />
+        <Form.Control placeholder='Enter Description'
+        onChange={e => {
+          setDescription(e.target.value);
+        }}
+        />
       </Form.Group>
       <Button variant='primary' type='submit'>
         Submit

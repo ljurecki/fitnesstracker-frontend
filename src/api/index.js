@@ -59,3 +59,5 @@ export const getUserData = async jwt => {
 };
 
 export const createActivity = async () => {};
+
+export const getAllActivities = async () => {};
