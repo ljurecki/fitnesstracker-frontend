@@ -4,12 +4,12 @@ const BASE_URL = 'http://fitnesstrac-kr.herokuapp.com/api';
 const createHeaders = jwt => {
   return jwt
     ? {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${jwt}`,
-      }
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${jwt}`,
+    }
     : {
-        'Content-Type': 'application/json',
-      };
+      'Content-Type': 'application/json',
+    };
 };
 
 export const login = async (username, password) => {
@@ -58,6 +58,18 @@ export const getUserData = async jwt => {
   }
 };
 
-export const createActivity = async () => {};
+export const getAllActivities = async () => {
+  try {
+    return await fetch(`${BASE_URL}/activities`,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      }).then(response => response.json());
+  } catch (err) {
+    console.error(err);
+  }
+  ;
+}
 
-export const getAllActivities = async () => {};
+export const createActivity = async () => { };

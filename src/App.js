@@ -34,10 +34,6 @@ const App = () => {
     }
   }
 
-//   async function fetchActivities() {
-//     const results = await getAllActivities(jwt)
-//     setActivities(results.data.activities);
-// }
 
   useEffect(() => {
     persistLogin();
