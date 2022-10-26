@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
 import { Navbar } from './components';
-import { Home, Login, Routines, Activities, Register } from './pages';
+import { Home, Login, Routines, Activities, Register, UpdateActivity } from './pages';
 import { getUserData } from './api';
 
 const App = () => {
@@ -64,6 +64,10 @@ const App = () => {
           <Route
             path='/activities'
             element={<Activities jwt={jwt} user={user} />}
+          />
+           <Route
+            path='/activities/:activityId'
+            element={<UpdateActivity user={user} jwt={jwt} />}
           />
           <Route path='/register' element={<Register navigate={navigate} />} />
           <Route

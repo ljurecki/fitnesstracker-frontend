@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { getAllActivities } from '../api';
 import { ActivityForm, EditActivity } from '../components';
 import { Modal, Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 const Activities = ({ jwt, user }) => {
   const [show, setShow] = useState(false);
@@ -29,6 +30,7 @@ const Activities = ({ jwt, user }) => {
             Create an Activity
           </Button>) : (null)
       }
+      
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
@@ -39,7 +41,6 @@ const Activities = ({ jwt, user }) => {
 
         </Modal.Footer>
       </Modal>
-
 
 
       <div id='outer div element'>
@@ -54,21 +55,10 @@ const Activities = ({ jwt, user }) => {
 
                 {
                   jwt ? (
-                    <Button variant="primary" onClick={handleShow}>
-                      Edit Activity
+                    <Button variant="primary">
+                      <Link to={`${id}`}>Edit Activity</Link>
                     </Button>) : (null)
                 }
-
-                <Modal show={show} onHide={handleClose}>
-                  <Modal.Header closeButton>
-                    <Modal.Title>Edit Activity</Modal.Title>
-                  </Modal.Header>
-                  <Modal.Body><EditActivity user={user} jwt={jwt} /> </Modal.Body>
-                  <Modal.Footer>
-
-                  </Modal.Footer>
-                </Modal>
-
 
               </div>
             )
