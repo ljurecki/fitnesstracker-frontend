@@ -9,7 +9,6 @@ const App = () => {
   const [jwt, setJwt] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState({});
-  const [activities, setActivities] = useState({});
   const navigate = useNavigate();
 
   function logOut() {
@@ -34,7 +33,6 @@ const App = () => {
     }
   }
 
-
   useEffect(() => {
     persistLogin();
   }, [jwt]);
@@ -51,10 +49,10 @@ const App = () => {
             path='/routines'
             element={
               <Routines
-              // user={user}
-              // isLoggedIn={isLoggedIn}
-              // jwt={jwt}
-              // navigate={navigate}
+                user={user}
+                // isLoggedIn={isLoggedIn}
+                // jwt={jwt}
+                // navigate={navigate}
               />
             }
           />
@@ -64,7 +62,7 @@ const App = () => {
           /> */}
           <Route
             path='/activities'
-            element={<Activities activities={Activities} /* user={user} */ />}
+            element={<Activities /* user={user} */ />}
           />
           <Route path='/register' element={<Register navigate={navigate} />} />
           <Route
