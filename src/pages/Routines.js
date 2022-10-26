@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { getMyRoutines, getPublicRoutines } from '../api';
-import { MyRoutines, PublicRoutines } from '../components';
+import { getRoutinesByUsername, getPublicRoutines } from '../api';
+import { MyRoutines, PublicRoutines, CreateRoutine } from '../components';
 import { Tabs, Tab } from 'react-bootstrap';
 
-const Routines = ({ user }) => {
+const Routines = ({ user, jwt, isLoggedIn }) => {
   const [publicRoutines, setPublicRoutines] = useState([]);
   const [myRoutines, setMyRoutines] = useState([]);
 
@@ -12,15 +12,17 @@ const Routines = ({ user }) => {
   };
 
   const fetchMyRoutines = async user => {
-    setMyRoutines(await getMyRoutines);
+    setMyRoutines(await getRoutinesByUsername(user));
   };
 
   useEffect(() => {
     fetchPublicRoutines();
-    fetchMyRoutines();
+    if (isLoggedIn) {
+      fetchMyRoutines(user);
+    }
   }, [user]);
 
-  // console.log(publicRoutines);
+  // console.log(user);
 
   return (
     <>
@@ -38,12 +40,20 @@ const Routines = ({ user }) => {
             // navigate={navigate}
           />
         </Tab>
-        {user && (
+        {isLoggedIn && (
           <Tab eventKey='my-routines' title='My Routines'>
             <MyRoutines myRoutines={myRoutines} />
           </Tab>
         )}
       </Tabs>
+
+      {isLoggedIn && (
+        <CreateRoutine
+          jwt={jwt}
+          // fetchPosts={fetchPosts}
+          // fetchMyPosts={fetchMyPosts}
+        />
+      )}
     </>
   );
 };

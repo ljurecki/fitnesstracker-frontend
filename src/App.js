@@ -50,8 +50,8 @@ const App = () => {
             element={
               <Routines
                 user={user}
-                // isLoggedIn={isLoggedIn}
-                // jwt={jwt}
+                jwt={jwt}
+                isLoggedIn={isLoggedIn}
                 // navigate={navigate}
               />
             }

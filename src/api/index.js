@@ -83,13 +83,31 @@ export const getPublicRoutines = async () => {
   }
 };
 
-export const getMyRoutines = async user => {
-  // try {
-  //   const headers = createHeaders();
-  //   return await fetch(`${BASE_URL}/routines`, {
-  //     headers,
-  //   }).then(response => response.json());
-  // } catch (err) {
-  //   console.error(err);
-  // }
+export const getRoutinesByUsername = async user => {
+  try {
+    const headers = createHeaders();
+    const { username } = user;
+    return await fetch(`${BASE_URL}/${username}/routines`, {
+      headers,
+    }).then(response => response.json());
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const createRoutine = async ({ name, goal, isPublic }, jwt) => {
+  try {
+    const headers = createHeaders(jwt);
+    return await fetch(`${BASE_URL}/routines`, {
+      method: 'POST',
+      headers,
+      body: JSON.stringify({
+        name,
+        goal,
+        isPublic,
+      }),
+    }).then(response => response.json());
+  } catch (err) {
+    console.error(err);
+  }
 };
