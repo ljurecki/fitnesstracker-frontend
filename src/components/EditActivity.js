@@ -1,25 +1,27 @@
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
-import { createActivity } from '../api';
+import { updateActivity } from '../api';
 
-const ActivityForm = ({jwt, user}) => {
+const EditActivity = ({jwt, user}) => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
 
-  async function addActivity() {
-    const newActivity = {
+  async function editActivity() {
+    const updatedActivity = {
       name,
       description,
     };
-    const result = await createActivity(jwt, user, newActivity);
+    const result = await updateActivity(jwt, user, updatedActivity);
+    console.log(result)
   }
+  console.log(editActivity)
 
   return (
     <Form
       id='forms'
       onSubmit={event => {
         event.preventDefault();
-        addActivity();
+        editActivity();
       }}>
       <Form.Group className='mb-3'>
         <Form.Label>Activity Name</Form.Label>
@@ -39,11 +41,11 @@ const ActivityForm = ({jwt, user}) => {
           }}
         />
       </Form.Group>
-      <Button variant='primary' type='submit' onClick={(event) => { event.preventDefault(); addActivity() }}>
+      <Button variant='primary' type='submit' onClick={(event) => { event.preventDefault(); editActivity() }}>
         Submit
       </Button>
     </Form>
   );
 };
 
-export default ActivityForm;
+export default EditActivity;

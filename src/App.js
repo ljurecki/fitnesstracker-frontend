@@ -9,7 +9,6 @@ const App = () => {
   const [jwt, setJwt] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState({});
-  const [activities, setActivities] = useState({});
   const navigate = useNavigate();
 
   function logOut() {
@@ -64,7 +63,7 @@ const App = () => {
           /> */}
           <Route
             path='/activities'
-            element={<Activities activities={Activities} /* user={user} */ />}
+            element={<Activities jwt={jwt} user={user} />}
           />
           <Route path='/register' element={<Register navigate={navigate} />} />
           <Route

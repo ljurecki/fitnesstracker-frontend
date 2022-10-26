@@ -69,7 +69,39 @@ export const getAllActivities = async () => {
   } catch (err) {
     console.error(err);
   }
-  ;
-}
+};
 
-export const createActivity = async () => { };
+export const createActivity = async (jwt, user, {name, description}) => {
+  try {
+    const headers = createHeaders(jwt);
+    return await fetch(`${BASE_URL}/activities`,{
+    method: "POST",
+    headers,
+    body: JSON.stringify({
+      user,
+      name: name,
+      description: description,
+    })
+  }).then(response => response.json());
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const updateActivity = async (jwt, user, {name, description}) => {
+  try {
+    const headers = createHeaders(jwt);
+    return await fetch(`${BASE_URL}/activities/:activityId`,{
+    method: "PATCH",
+    headers,
+    body: JSON.stringify({
+      user,
+      name: name,
+      description: description,
+    })
+  }).then(response => response.json());
+
+  } catch (err) {
+    console.error(err);
+  }
+};
