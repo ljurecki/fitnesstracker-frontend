@@ -13,29 +13,15 @@ import {
 const ViewRoutine = ({ routine }) => {
   const [showModal, setShowModal] = useState(false);
 
-  if (routine.activities && routine.activities.length) {
-    console.log(routine);
-  }
-
-  // const [name, setName] = useState('');
-  // const [goal, setGoal] = useState('');
-  // const [isPublic, setIsPublic] = useState(false);
-
   const openModal = () => setShowModal(true);
   const closeModal = () => {
     setShowModal(false);
-    // setName('');
-    // setGoal('');
-    // setIsPublic(false);
   };
 
   return (
     <>
       <Button
         variant='success'
-        // className='position-fixed sticky-bottom rounded-pill shadow'
-        // size='lg'
-        // style={{ bottom: '25px', right: '25px' }}
         onClick={() => {
           openModal();
         }}>
@@ -48,33 +34,15 @@ const ViewRoutine = ({ routine }) => {
             {routine.name}
           </Modal.Title>
         </Modal.Header>
-        <Form
-        // onSubmit={e => {
-        //   e.preventDefault();
-        //   handleSubmit();
-        // }}
-        >
-          {/* <Form.Group className='m-3'>
-            <FloatingLabel label='Name'>
-              <Form.Control
-                id='routineName'
-                // placeholder='Name'
-                readOnly
-                value={routine.name}
-              />
-            </FloatingLabel>
-          </Form.Group> */}
-
+        <Form>
           <Form.Group className='m-3'>
             <FloatingLabel label='Goal'>
               <Form.Control
                 as='textarea'
                 id='routineGoal'
-                // placeholder='Goal'
                 plaintext
                 readOnly
                 style={{ height: '80px' }}
-                // onChange={e => setGoal(e.target.value)}
                 defaultValue={routine.goal}
               />
             </FloatingLabel>
@@ -85,11 +53,8 @@ const ViewRoutine = ({ routine }) => {
               <FloatingLabel label='Creator'>
                 <Form.Control
                   id='creatorName'
-                  // placeholder='Goal'
                   plaintext
                   readOnly
-                  // style={{ height: '80px' }}
-                  // onChange={e => setGoal(e.target.value)}
                   defaultValue={routine.creatorName}
                 />
               </FloatingLabel>
@@ -100,9 +65,6 @@ const ViewRoutine = ({ routine }) => {
                 type='checkbox'
                 label='Public'
                 readOnly
-                // onChange={e => {
-                //   setIsPublic(e.target.checked);
-                // }}
                 checked={routine.isPublic}
               />
             </Col>
@@ -143,12 +105,9 @@ const ViewRoutine = ({ routine }) => {
           </Card>
 
           <Form.Group className='m-3 d-flex justify-content-end'>
-            {/* <Button variant='success' type='submit'>
-              Create Routine
-            </Button> */}
             <Button
               variant='secondary'
-              className='mx-2 justify-self-end'
+              className='mx-2'
               onClick={() => closeModal()}>
               Close
             </Button>
