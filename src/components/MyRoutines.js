@@ -1,5 +1,6 @@
 import React from 'react';
-import { ListGroup, Button, Card } from 'react-bootstrap';
+import { ListGroup, Button, Card, ButtonGroup } from 'react-bootstrap';
+import { ViewRoutine } from './';
 
 const MyRoutines = ({ myRoutines }) => {
   return (
@@ -23,6 +24,9 @@ const MyRoutines = ({ myRoutines }) => {
               <Card.Title as='h2'>{name}</Card.Title>
               <Card.Text>Goal: {goal}</Card.Text>
               <Card.Text>Creator: {creatorName}</Card.Text>
+              <ButtonGroup>
+                <ViewRoutine routine={routine} />
+              </ButtonGroup>
               {/* {isLoggedIn && (
                     <>
                       {author._id === userId ? (

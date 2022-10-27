@@ -80,9 +80,9 @@ const ViewRoutine = ({ routine }) => {
             {routine.activities && routine.activities.length ? (
               <ListGroup id='attachedActivitiesContainer'>
                 {routine.activities.map(activity => {
-                  const { name, description, count, duration } = activity;
+                  const { id, name, description, count, duration } = activity;
                   return (
-                    <ListGroup.Item className='m-1'>
+                    <ListGroup.Item key={id} className='m-1'>
                       <Card.Title>Name: {name}</Card.Title>
                       <Card.Text>Description: {description}</Card.Text>
                       <Row>
