@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
-import { Navbar } from './components';
+import { Navbar, EditRoutine } from './components';
 import { Home, Login, Routines, Activities, Register } from './pages';
 import { getUserData } from './api';
 
@@ -56,10 +56,12 @@ const App = () => {
               />
             }
           />
-          {/* <Route
+          <Route
             path='/routines/:routineId'
-            element={<EditRoutine user={user} navigate={navigate} jwt={jwt} />}
-          /> */}
+            element={
+              <EditRoutine /* user={user} navigate={navigate} jwt={jwt} */ />
+            }
+          />
           <Route
             path='/activities'
             element={<Activities /* user={user} */ />}

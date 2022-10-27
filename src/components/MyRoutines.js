@@ -4,9 +4,7 @@ import { ListGroup, Button, Card } from 'react-bootstrap';
 const MyRoutines = ({ myRoutines }) => {
   return (
     <ListGroup variant='flush'>
-      {myRoutines && (
-        <>
-          {/* <InputGroup className='p-2 text-white bg-dark'>
+      {/* <InputGroup className='p-2 text-white bg-dark'>
             <Form.Control
               placeholder='Search Posts'
               onChange={e => setSearchTerm(e.target.value)}
@@ -16,16 +14,16 @@ const MyRoutines = ({ myRoutines }) => {
               Clear
             </Button>
           </InputGroup> */}
-          {myRoutines.length ? (
-            myRoutines.map(routine => {
-              const { id, creatorName, name, goal } = routine;
+      {myRoutines && myRoutines.length ? (
+        myRoutines.map(routine => {
+          const { id, creatorName, name, goal } = routine;
 
-              return (
-                <ListGroup.Item key={id} className='px-0 py-3 mx-3'>
-                  <Card.Title as='h2'>{name}</Card.Title>
-                  <Card.Text>Goal: {goal}</Card.Text>
-                  <Card.Text>Creator Name: {creatorName}</Card.Text>
-                  {/* {isLoggedIn && (
+          return (
+            <ListGroup.Item key={id} className='px-0 py-3 mx-3'>
+              <Card.Title as='h2'>{name}</Card.Title>
+              <Card.Text>Goal: {goal}</Card.Text>
+              <Card.Text>Creator: {creatorName}</Card.Text>
+              {/* {isLoggedIn && (
                     <>
                       {author._id === userId ? (
                         <>
@@ -46,13 +44,11 @@ const MyRoutines = ({ myRoutines }) => {
                       )}
                     </>
                   )} */}
-                </ListGroup.Item>
-              );
-            })
-          ) : (
-            <h3 className='text-center mt-4'>No Routines Found</h3>
-          )}
-        </>
+            </ListGroup.Item>
+          );
+        })
+      ) : (
+        <h3 className='text-center mt-4'>No Routines Found</h3>
       )}
     </ListGroup>
   );

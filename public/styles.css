@@ -1,0 +1,7 @@
+#attachedActivities {
+  height: 30rem;
+}
+
+#attachedActivitiesContainer {
+  overflow: auto;
+}

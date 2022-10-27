@@ -21,7 +21,6 @@ const Routines = ({ user, jwt, isLoggedIn }) => {
       fetchMyRoutines(user);
     }
   }, [user]);
-
   // console.log(user);
 
   return (
@@ -35,7 +34,8 @@ const Routines = ({ user, jwt, isLoggedIn }) => {
         <Tab eventKey='public-routines' title='Public Routines'>
           <PublicRoutines
             publicRoutines={publicRoutines}
-            // isLoggedIn={isLoggedIn}
+            isLoggedIn={isLoggedIn}
+            user={user}
             // jwt={jwt}
             // navigate={navigate}
           />

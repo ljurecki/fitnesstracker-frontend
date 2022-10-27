@@ -87,7 +87,7 @@ export const getRoutinesByUsername = async user => {
   try {
     const headers = createHeaders();
     const { username } = user;
-    return await fetch(`${BASE_URL}/${username}/routines`, {
+    return await fetch(`${BASE_URL}/users/${username}/routines`, {
       headers,
     }).then(response => response.json());
   } catch (err) {
