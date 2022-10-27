@@ -11,14 +11,14 @@ const Routines = ({ user, jwt, isLoggedIn }) => {
     setPublicRoutines(await getPublicRoutines());
   };
 
-  const fetchMyRoutines = async user => {
-    setMyRoutines(await getRoutinesByUsername(user));
+  const fetchMyRoutines = async (user, jwt) => {
+    setMyRoutines(await getRoutinesByUsername(user, jwt));
   };
 
   useEffect(() => {
     fetchPublicRoutines();
     if (isLoggedIn) {
-      fetchMyRoutines(user);
+      fetchMyRoutines(user, jwt);
     }
   }, [user]);
   // console.log(user);

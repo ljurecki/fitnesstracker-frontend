@@ -83,9 +83,9 @@ export const getPublicRoutines = async () => {
   }
 };
 
-export const getRoutinesByUsername = async user => {
+export const getRoutinesByUsername = async (user, jwt) => {
   try {
-    const headers = createHeaders();
+    const headers = createHeaders(jwt);
     const { username } = user;
     return await fetch(`${BASE_URL}/users/${username}/routines`, {
       headers,
@@ -106,6 +106,19 @@ export const createRoutine = async ({ name, goal, isPublic }, jwt) => {
         goal,
         isPublic,
       }),
+    }).then(response => response.json());
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const updateRoutine = async (updatedRoutine, jwt) => {
+  try {
+    const headers = createHeaders(jwt);
+    return await fetch(`${BASE_URL}/routines/${updatedRoutine.id}`, {
+      method: 'PATCH',
+      headers,
+      body: JSON.stringify(updatedRoutine),
     }).then(response => response.json());
   } catch (err) {
     console.error(err);

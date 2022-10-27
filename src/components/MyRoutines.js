@@ -1,20 +1,11 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { ListGroup, Button, Card, ButtonGroup } from 'react-bootstrap';
 import { ViewRoutine } from './';
 
 const MyRoutines = ({ myRoutines }) => {
   return (
     <ListGroup variant='flush'>
-      {/* <InputGroup className='p-2 text-white bg-dark'>
-            <Form.Control
-              placeholder='Search Posts'
-              onChange={e => setSearchTerm(e.target.value)}
-              value={searchTerm}
-            />
-            <Button variant='info' onClick={() => setSearchTerm('')}>
-              Clear
-            </Button>
-          </InputGroup> */}
       {myRoutines && myRoutines.length ? (
         myRoutines.map(routine => {
           const { id, creatorName, name, goal } = routine;
@@ -26,28 +17,19 @@ const MyRoutines = ({ myRoutines }) => {
               <Card.Text>Creator: {creatorName}</Card.Text>
               <ButtonGroup>
                 <ViewRoutine routine={routine} />
+
+                <Link to={`/routines/${id}`} state={{ routine: routine }}>
+                  <Button variant='info' className='mx-2'>
+                    Edit
+                  </Button>
+                </Link>
+
+                <Button
+                  variant='danger'
+                  onClick={() => confirm('Are you sure?')}>
+                  Delete
+                </Button>
               </ButtonGroup>
-              {/* {isLoggedIn && (
-                    <>
-                      {author._id === userId ? (
-                        <>
-                          <Link to={`/posts/${_id}`} state={{ post: post }}>
-                            <Button variant='info'>Edit post</Button>
-                          </Link>
-                          <Button
-                            variant='danger'
-                            onClick={() => handleDelete(post)}
-                            className='mx-2'>
-                            Delete
-                          </Button>
-                        </>
-                      ) : (
-                        <>
-                          <MessageForm post={post} jwt={jwt} />
-                        </>
-                      )}
-                    </>
-                  )} */}
             </ListGroup.Item>
           );
         })

@@ -59,7 +59,7 @@ const App = () => {
           <Route
             path='/routines/:routineId'
             element={
-              <EditRoutine /* user={user} navigate={navigate} jwt={jwt} */ />
+              <EditRoutine navigate={navigate} jwt={jwt} /* user={user}   */ />
             }
           />
           <Route

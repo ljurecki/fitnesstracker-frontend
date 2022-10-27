@@ -1,10 +1,21 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { ListGroup, Card, Button, ButtonGroup } from 'react-bootstrap';
 import ViewRoutine from './ViewRoutine';
 
 const PublicRoutines = ({ publicRoutines, isLoggedIn, user }) => {
   return (
     <ListGroup variant='flush'>
+      {/* <InputGroup className='p-2 text-white bg-dark'>
+            <Form.Control
+              placeholder='Search Posts'
+              onChange={e => setSearchTerm(e.target.value)}
+              value={searchTerm}
+            />
+            <Button variant='info' onClick={() => setSearchTerm('')}>
+              Clear
+            </Button>
+          </InputGroup> */}
       {publicRoutines && publicRoutines.length ? (
         publicRoutines.map(routine => {
           const { id, creatorName, name, goal } = routine;
@@ -15,15 +26,14 @@ const PublicRoutines = ({ publicRoutines, isLoggedIn, user }) => {
               <Card.Text>Goal: {goal}</Card.Text>
               <Card.Text>Creator: {creatorName}</Card.Text>
               <ButtonGroup>
-                {/* <Link to={`/posts/${_id}`} state={{ post: post }}> */}
-                {/* <Button variant='success'>View</Button> */}
                 <ViewRoutine routine={routine} />
-                {/* </Link> */}
                 {isLoggedIn && creatorName === user.username && (
                   <>
-                    <Button variant='info' className='mx-2'>
-                      Edit
-                    </Button>
+                    <Link to={`/routines/${id}`} state={{ routine: routine }}>
+                      <Button variant='info' className='mx-2'>
+                        Edit
+                      </Button>
+                    </Link>
                     <Button variant='danger'>Delete</Button>
                   </>
                 )}
