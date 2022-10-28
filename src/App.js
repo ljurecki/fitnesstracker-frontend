@@ -3,6 +3,15 @@ import { Route, Routes, useNavigate } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
 import { Navbar, EditRoutine } from './components';
 import { Home, Login, Routines, Activities, Register } from './pages';
+import { Navbar } from './components';
+import {
+  Home,
+  Login,
+  Routines,
+  Activities,
+  Register,
+  UpdateActivity,
+} from './pages';
 import { getUserData } from './api';
 
 const App = () => {
@@ -64,7 +73,11 @@ const App = () => {
           />
           <Route
             path='/activities'
-            element={<Activities /* user={user} */ />}
+            element={<Activities jwt={jwt} user={user} />}
+          />
+          <Route
+            path='/activities/:activityId'
+            element={<UpdateActivity jwt={jwt} />}
           />
           <Route path='/register' element={<Register navigate={navigate} />} />
           <Route

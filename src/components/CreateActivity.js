@@ -2,17 +2,16 @@ import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { createActivity } from '../api';
 
-const CreateActivity = () => {
+const ActivityForm = ({jwt, user}) => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
-  const newActivity = {
-    name,
-    description,
-  };
 
   async function addActivity() {
-    const result = await createActivity(token, newActivity);
-    // navigate('./Activities')
+    const newActivity = {
+      name,
+      description,
+    };
+    const result = await createActivity(jwt, user, newActivity);
   }
 
   return (
@@ -35,16 +34,16 @@ const CreateActivity = () => {
       <Form.Group className='mb-3'>
         <Form.Label>Description</Form.Label>
         <Form.Control placeholder='Enter Description'
-        onChange={e => {
-          setDescription(e.target.value);
-        }}
+          onChange={e => {
+            setDescription(e.target.value);
+          }}
         />
       </Form.Group>
-      <Button variant='primary' type='submit'>
+      <Button variant='primary' type='submit' onClick={(event) => { event.preventDefault(); addActivity() }}>
         Submit
       </Button>
     </Form>
   );
 };
 
-export default CreateActivity;
+export default ActivityForm;

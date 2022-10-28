@@ -70,8 +70,6 @@ export const getAllActivities = async () => {
   }
 };
 
-export const createActivity = async () => {};
-
 export const getPublicRoutines = async () => {
   try {
     const headers = createHeaders();
@@ -119,6 +117,39 @@ export const updateRoutine = async (updatedRoutine, jwt) => {
       method: 'PATCH',
       headers,
       body: JSON.stringify(updatedRoutine),
+    }).then(response => response.json());
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const createActivity = async (jwt, user, { name, description }) => {
+  try {
+    const headers = createHeaders(jwt);
+    return await fetch(`${BASE_URL}/activities`, {
+      method: 'POST',
+      headers,
+      body: JSON.stringify({
+        user,
+        name: name,
+        description: description,
+      }),
+    }).then(response => response.json());
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const updateActivity = async (jwt, { id, name, description }) => {
+  try {
+    const headers = createHeaders(jwt);
+    return await fetch(`${BASE_URL}/activities/${id}`, {
+      method: 'PATCH',
+      headers,
+      body: JSON.stringify({
+        name: name,
+        description: description,
+      }),
     }).then(response => response.json());
   } catch (err) {
     console.error(err);

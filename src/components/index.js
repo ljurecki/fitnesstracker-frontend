@@ -6,4 +6,6 @@ export { default as MyRoutines } from './MyRoutines';
 export { default as CreateRoutine } from './CreateRoutine';
 export { default as EditRoutine } from './EditRoutine';
 export { default as ViewRoutine } from './ViewRoutine';
+export { default as ActivityForm } from './CreateActivity';
+export { default as EditActivity } from './EditActivity';
 export { default as Navbar } from './NavBar';

@@ -5,6 +5,7 @@ import { Form, Button } from 'react-bootstrap';
 const LoginForm = ({ navigate, setJwt }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  // const [errorMessage, setErrorMessage] = useState('');
 
   const loginUser = async () => {
     const result = await login(username, password);
@@ -18,6 +19,7 @@ const LoginForm = ({ navigate, setJwt }) => {
       }
     } else {
       console.error(result.error);
+      // setErrorMessage(result.error)
     }
   };
 
@@ -54,6 +56,19 @@ const LoginForm = ({ navigate, setJwt }) => {
         Register
       </Button>
     </Form>
+
+    //   errorMessage ? (
+    //     <>
+    //     {[
+    //       'danger',
+    //     ].map((variant) => (
+    //       <Alert key={variant} variant={variant}>
+    //         This is a {variant} alert—check it out!
+    //       </Alert>
+    //     ))}
+    //   </>
+
+    //   ): (<></>)
   );
 };
 
