@@ -20,59 +20,47 @@ const Activities = ({ jwt, user }) => {
   }, []);
 
   return (
-
     <div>
       <h1>Activities</h1>
 
-      {
-        jwt ? (
-          <Button variant="primary" onClick={handleShow}>
-            Create an Activity
-          </Button>) : (null)
-      }
-      
+      {jwt ? (
+        <Button variant='primary' onClick={handleShow}>
+          Create an Activity
+        </Button>
+      ) : null}
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Create Activity</Modal.Title>
         </Modal.Header>
-        <Modal.Body><ActivityForm user={user} jwt={jwt} /> </Modal.Body>
-        <Modal.Footer>
-
-        </Modal.Footer>
+        <Modal.Body>
+          <ActivityForm user={user} jwt={jwt} />{' '}
+        </Modal.Body>
+        <Modal.Footer></Modal.Footer>
       </Modal>
-
 
       <div id='outer div element'>
         {activitiesToDisplay ? (
-
-          activitiesToDisplay.map((activity) => {
+          activitiesToDisplay.map(activity => {
             const { id, name, description } = activity;
             return (
               <div key={id}>
                 <h1>{name}</h1>
                 <h3>Description:</h3> <p>{description}</p>
-
-                {
-                  jwt ? (
-                    <Link to={`/activities/${id}`} state={{activity: activity}}>
-                    <Button variant="primary">
-                      Edit Activity
-                    </Button></Link>) : (null)
-                }
-
+                {jwt ? (
+                  <Link to={`/activities/${id}`} state={{ activity: activity }}>
+                    <Button variant='primary'>Edit Activity</Button>
+                  </Link>
+                ) : null}
               </div>
-            )
-          }))
-          : (<h1>No Activities Found!</h1>)
-        }
-
-
-
+            );
+          })
+        ) : (
+          <h1>No Activities Found!</h1>
+        )}
       </div>
     </div>
-  )
-
+  );
 };
 
 export default Activities;

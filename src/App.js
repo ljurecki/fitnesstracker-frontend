@@ -2,7 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
 import { Navbar } from './components';
-import { Home, Login, Routines, Activities, Register, UpdateActivity } from './pages';
+import {
+  Home,
+  Login,
+  Routines,
+  EditRoutine,
+  Activities,
+  Register,
+  UpdateActivity,
+} from './pages';
 import { getUserData } from './api';
 
 const App = () => {
@@ -33,7 +41,6 @@ const App = () => {
     }
   }
 
-
   useEffect(() => {
     persistLogin();
   }, [jwt]);
@@ -50,22 +57,24 @@ const App = () => {
             path='/routines'
             element={
               <Routines
-              // user={user}
-              // isLoggedIn={isLoggedIn}
-              // jwt={jwt}
-              // navigate={navigate}
+                user={user}
+                jwt={jwt}
+                isLoggedIn={isLoggedIn}
+                // navigate={navigate}
               />
             }
           />
-          {/* <Route
+          <Route
             path='/routines/:routineId'
-            element={<EditRoutine user={user} navigate={navigate} jwt={jwt} />}
-          /> */}
+            element={
+              <EditRoutine navigate={navigate} jwt={jwt} /* user={user}   */ />
+            }
+          />
           <Route
             path='/activities'
             element={<Activities jwt={jwt} user={user} />}
           />
-           <Route
+          <Route
             path='/activities/:activityId'
             element={<UpdateActivity jwt={jwt} />}
           />

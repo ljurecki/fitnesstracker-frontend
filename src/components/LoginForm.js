@@ -18,7 +18,7 @@ const LoginForm = ({ navigate, setJwt }) => {
         console.error('No token returned from server');
       }
     } else {
-      console.error(result.error)
+      console.error(result.error);
       // setErrorMessage(result.error)
     }
   };
@@ -57,21 +57,18 @@ const LoginForm = ({ navigate, setJwt }) => {
       </Button>
     </Form>
 
-  //   errorMessage ? (
-  //     <>
-  //     {[
-  //       'danger',
-  //     ].map((variant) => (
-  //       <Alert key={variant} variant={variant}>
-  //         This is a {variant} alert—check it out!
-  //       </Alert>
-  //     ))}
-  //   </>
+    //   errorMessage ? (
+    //     <>
+    //     {[
+    //       'danger',
+    //     ].map((variant) => (
+    //       <Alert key={variant} variant={variant}>
+    //         This is a {variant} alert—check it out!
+    //       </Alert>
+    //     ))}
+    //   </>
 
-
-
-  //   ): (<></>)
-
+    //   ): (<></>)
   );
 };
 
