@@ -3,5 +3,5 @@
 }
 
 #attachedActivitiesContainer {
-  overflow: auto;
+  overflow: scroll;
 }
