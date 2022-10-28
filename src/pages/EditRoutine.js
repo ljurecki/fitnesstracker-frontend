@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { Button, Card, FloatingLabel, Form } from 'react-bootstrap';
+import { Button, Card, FloatingLabel, Form, Alert } from 'react-bootstrap';
 import { updateRoutine } from '../api';
 
 const EditRoutine = ({ navigate, jwt }) => {
   const loc = useLocation();
   const { routine } = loc.state;
   const { id, name, goal, isPublic } = routine;
+  const [errorMessage, setErrorMessage] = useState('');
 
   const [newName, setNewName] = useState(name);
   const [newGoal, setNewGoal] = useState(goal);
@@ -24,6 +25,7 @@ const EditRoutine = ({ navigate, jwt }) => {
       navigate('/routines');
     } else {
       console.error(result.error);
+      setErrorMessage(result.error); 
     }
   };
 
@@ -87,6 +89,21 @@ const EditRoutine = ({ navigate, jwt }) => {
               Cancel
             </Button>
           </Form.Group>
+          {
+                errorMessage ? (
+                    <>
+                        {[
+                            'danger',
+                        ].map((variant) => (
+                            <Alert key={variant} variant={variant}>
+                                Sorry, Routine Name Already Exists!
+                            </Alert>
+                        ))}
+
+                    </>
+
+                ) : (<></>)
+            }
         </Form>
       </Card>
     </>

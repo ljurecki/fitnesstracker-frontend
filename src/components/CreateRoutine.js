@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { createRoutine } from '../api';
-import { Button, Modal, Form, FloatingLabel } from 'react-bootstrap';
+import { Button, Modal, Form, FloatingLabel, Alert } from 'react-bootstrap';
 
 const CreateRoutine = ({ jwt }) => {
   const [showModal, setShowModal] = useState(false);
@@ -8,6 +8,7 @@ const CreateRoutine = ({ jwt }) => {
   const [name, setName] = useState('');
   const [goal, setGoal] = useState('');
   const [isPublic, setIsPublic] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const openModal = () => setShowModal(true);
   const closeModal = () => {
@@ -28,6 +29,7 @@ const CreateRoutine = ({ jwt }) => {
       closeModal();
     } else {
       console.error(response.error);
+      setErrorMessage(response.error); 
     }
   };
 
@@ -102,6 +104,21 @@ const CreateRoutine = ({ jwt }) => {
               Close
             </Button>
           </Form.Group>
+          {
+                errorMessage ? (
+                    <>
+                        {[
+                            'danger',
+                        ].map((variant) => (
+                            <Alert key={variant} variant={variant}>
+                                Sorry, Routine Name Already Exists!
+                            </Alert>
+                        ))}
+
+                    </>
+
+                ) : (<></>)
+            }
         </Form>
       </Modal>
     </>
