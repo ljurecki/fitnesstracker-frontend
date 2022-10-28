@@ -67,7 +67,7 @@ const App = () => {
           />
            <Route
             path='/activities/:activityId'
-            element={<UpdateActivity user={user} jwt={jwt} />}
+            element={<UpdateActivity jwt={jwt} />}
           />
           <Route path='/register' element={<Register navigate={navigate} />} />
           <Route

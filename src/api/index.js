@@ -88,14 +88,13 @@ export const createActivity = async (jwt, user, {name, description}) => {
   }
 };
 
-export const updateActivity = async (jwt, user, {name, description}) => {
+export const updateActivity = async (jwt, {id, name, description}) => {
   try {
     const headers = createHeaders(jwt);
-    return await fetch(`${BASE_URL}/activities/:activityId`,{
+    return await fetch(`${BASE_URL}/activities/${id}`,{
     method: "PATCH",
     headers,
     body: JSON.stringify({
-      user,
       name: name,
       description: description,
     })

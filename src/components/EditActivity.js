@@ -1,29 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Form, Button } from 'react-bootstrap';
-import { updateActivity } from '../api';
+import { useLocation } from 'react-router-dom'
+import { updateActivity} from '../api';
 
-const EditActivity = ({ jwt, user, activities }) => {
-    const {activityID} = useParams();
 
-    const [currentActivity] = activities.filter(activity => activity.id === activityID);
-    const { name, description } = currentActivity;
+const EditActivity = ({jwt}) => {
+    const loc = useLocation();
+    const { activity } = loc.state;
+    const { id, name, description } = activity
 
-    
     const [newName, setNewName] = useState(name);
     const [newDescription, setNewDescription] = useState(description);
-    
+
 
     async function editActivity() {
         const updatedActivity = {
-            jwt: jwt,
+            id,
             name: newName,
             description: newDescription,
-            id:activityID
         };
-        const result = await updateActivity(jwt, user, updatedActivity);
+        const result = await updateActivity(jwt, updatedActivity);
         console.log(result)
     }
-    console.log(editActivity)
 
     return (
         <Form
@@ -35,22 +33,25 @@ const EditActivity = ({ jwt, user, activities }) => {
             <Form.Group className='mb-3'>
                 <Form.Label>New Activity Name</Form.Label>
                 <Form.Control
-                    placeholder='Enter New Name'
+                    placeholder='Name'
                     onChange={e => {
                         setNewName(e.target.value);
+
                     }}
+                    value={newName}
                 />
             </Form.Group>
 
             <Form.Group className='mb-3'>
                 <Form.Label>New Description</Form.Label>
-                <Form.Control placeholder='Enter New Description'
+                <Form.Control placeholder='Description'
                     onChange={e => {
                         setNewDescription(e.target.value);
                     }}
+                    value={newDescription}
                 />
             </Form.Group>
-            <Button variant='primary' type='submit' onClick={(event) => { event.preventDefault(); editActivity() }}>
+            <Button variant='primary' type='submit'>
                 Update
             </Button>
         </Form>
@@ -58,3 +59,4 @@ const EditActivity = ({ jwt, user, activities }) => {
 };
 
 export default EditActivity;
+

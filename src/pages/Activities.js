@@ -55,9 +55,10 @@ const Activities = ({ jwt, user }) => {
 
                 {
                   jwt ? (
+                    <Link to={`/activities/${id}`} state={{activity: activity}}>
                     <Button variant="primary">
-                      <Link to={`${id}`}>Edit Activity</Link>
-                    </Button>) : (null)
+                      Edit Activity
+                    </Button></Link>) : (null)
                 }
 
               </div>
