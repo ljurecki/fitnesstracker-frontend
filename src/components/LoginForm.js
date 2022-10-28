@@ -72,7 +72,7 @@ const LoginForm = ({ navigate, setJwt }) => {
 
   //   ): (<></>)
 
-  // );
+  );
 };
 
 export default LoginForm;
