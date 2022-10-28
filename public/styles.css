@@ -5,3 +5,16 @@
 #attachedActivitiesContainer {
   overflow: scroll;
 }
+
+.activityHeader {
+  background-color: #0D6EFD;
+  padding: 1px;
+}
+
+p.activityHeadinga {
+  font-size: 25px;
+  color: white;
+  text-align: center;
+  margin: auto;
+  padding: 7px;
+}

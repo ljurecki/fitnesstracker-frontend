@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { Form, Button, Alert } from 'react-bootstrap';
+import { Form, Button, Alert, FormGroup } from 'react-bootstrap';
 import { createActivity } from '../api';
 
-const ActivityForm = ({jwt, user, navigate}) => {
+const ActivityForm = ({ jwt, user, navigate }) => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
@@ -15,13 +15,15 @@ const ActivityForm = ({jwt, user, navigate}) => {
     const result = await createActivity(jwt, user, newActivity);
     if (result.error) {
       console.error(result.error);
-       setErrorMessage(result.error); 
-   } else {
-       navigate('./activities')
-   }
-}
+      setErrorMessage(result.error);
+    } else {
+      navigate('./activities')
+    }
+  }
 
   return (
+
+
     <Form
       id='forms'
       onSubmit={event => {
@@ -31,7 +33,7 @@ const ActivityForm = ({jwt, user, navigate}) => {
       <Form.Group className='mb-3'>
         <Form.Label>Activity Name</Form.Label>
         <Form.Control
-          placeholder='Enter Name'
+          placeholder=''
           onChange={e => {
             setName(e.target.value);
           }}
@@ -39,31 +41,49 @@ const ActivityForm = ({jwt, user, navigate}) => {
       </Form.Group>
 
       <Form.Group className='mb-3'>
-        <Form.Label>Description</Form.Label>
-        <Form.Control placeholder='Enter Description'
+        <Form.Label>
+          Description
+        </Form.Label>
+        <Form.Control
+          placeholder=''
+          style={{ height: '80px' }}
           onChange={e => {
             setDescription(e.target.value);
           }}
         />
       </Form.Group>
-      <Button variant='primary' type='submit' onClick={(event) => { event.preventDefault(); addActivity() }}>
-        Submit
-      </Button>
+      <FormGroup className='m-3 d-flex justify-content-end'>
+        <Button variant='success'
+          className='mx-2 justify-self-end'
+          type='submit'
+          onClick={(event) => {
+            event.preventDefault();
+            addActivity()
+          }}>
+          Create Activity
+        </Button>
+        <Button
+              variant='secondary'
+              className='mx-2 justify-self-end'
+              onClick={() => closeModal()}>
+              Close
+            </Button>
+      </FormGroup>
       {
-                errorMessage ? (
-                    <>
-                        {[
-                            'danger',
-                        ].map((variant) => (
-                            <Alert key={variant} variant={variant}>
-                                Sorry, Activity Name Already Exists!
-                            </Alert>
-                        ))}
+        errorMessage ? (
+          <>
+            {[
+              'danger',
+            ].map((variant) => (
+              <Alert key={variant} variant={variant}>
+                Sorry, Activity Name Already Exists!
+              </Alert>
+            ))}
 
-                    </>
+          </>
 
-                ) : (<></>)
-            }
+        ) : (<></>)
+      }
     </Form>
   );
 };
