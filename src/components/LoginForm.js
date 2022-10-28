@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { login } from '../api';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Alert, Modal } from 'react-bootstrap';
 
 const LoginForm = ({ navigate, setJwt }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  // const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const loginUser = async () => {
     const result = await login(username, password);
@@ -19,9 +19,11 @@ const LoginForm = ({ navigate, setJwt }) => {
       }
     } else {
       console.error(result.error);
-      // setErrorMessage(result.error)
+      setErrorMessage(result.error)
     }
   };
+
+
 
   return (
     <Form
@@ -55,20 +57,24 @@ const LoginForm = ({ navigate, setJwt }) => {
       <Button variant='success' onClick={() => navigate('/register')}>
         Register
       </Button>
+
+      {
+        errorMessage ? (
+          <>
+            {[
+              'danger',
+            ].map((variant) => (
+              <Alert key={variant} variant={variant}>
+               Username or Password is Incorrect. Please Try Again!
+              </Alert>
+            ))}
+
+          </>
+
+        ) : (<></>)
+      }
     </Form>
 
-    //   errorMessage ? (
-    //     <>
-    //     {[
-    //       'danger',
-    //     ].map((variant) => (
-    //       <Alert key={variant} variant={variant}>
-    //         This is a {variant} alert—check it out!
-    //       </Alert>
-    //     ))}
-    //   </>
-
-    //   ): (<></>)
   );
 };
 

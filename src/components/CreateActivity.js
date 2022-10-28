@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Alert } from 'react-bootstrap';
 import { createActivity } from '../api';
 
-const ActivityForm = ({jwt, user}) => {
+const ActivityForm = ({jwt, user, navigate}) => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   async function addActivity() {
     const newActivity = {
@@ -12,7 +13,13 @@ const ActivityForm = ({jwt, user}) => {
       description,
     };
     const result = await createActivity(jwt, user, newActivity);
-  }
+    if (result.error) {
+      console.error(result.error);
+       setErrorMessage(result.error); 
+   } else {
+       navigate('./activities')
+   }
+}
 
   return (
     <Form
@@ -42,6 +49,21 @@ const ActivityForm = ({jwt, user}) => {
       <Button variant='primary' type='submit' onClick={(event) => { event.preventDefault(); addActivity() }}>
         Submit
       </Button>
+      {
+                errorMessage ? (
+                    <>
+                        {[
+                            'danger',
+                        ].map((variant) => (
+                            <Alert key={variant} variant={variant}>
+                                Sorry, Activity Name Already Exists!
+                            </Alert>
+                        ))}
+
+                    </>
+
+                ) : (<></>)
+            }
     </Form>
   );
 };

@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { register } from '../api';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Alert } from 'react-bootstrap';
 
 const RegisterForm = ({ navigate }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const registerUser = async () => {
     const results = await register(username, password);
@@ -12,6 +13,7 @@ const RegisterForm = ({ navigate }) => {
       navigate('/login');
     } else {
       console.error(results.error);
+      setErrorMessage(results.error)
     }
   };
 
@@ -50,7 +52,23 @@ const RegisterForm = ({ navigate }) => {
       <Button variant='secondary' onClick={() => navigate('/login')}>
         Cancel
       </Button>
+      {
+        errorMessage ? (
+          <>
+            {[
+              'danger',
+            ].map((variant) => (
+              <Alert key={variant} variant={variant}>
+               Password must be at least 8 characters long!
+              </Alert>
+            ))}
+
+          </>
+
+        ) : (<></>)
+      }
     </Form>
+
   );
 };
 

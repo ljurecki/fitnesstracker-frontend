@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import { Form, Button } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Form, Button, Alert } from 'react-bootstrap';
 import { useLocation } from 'react-router-dom'
-import { updateActivity} from '../api';
+import { updateActivity } from '../api';
 
-
-const EditActivity = ({jwt}) => {
+const EditActivity = ({ jwt, navigate }) => {
     const loc = useLocation();
     const { activity } = loc.state;
     const { id, name, description } = activity
 
+    const [errorMessage, setErrorMessage] = useState('');
+
     const [newName, setNewName] = useState(name);
     const [newDescription, setNewDescription] = useState(description);
-
 
     async function editActivity() {
         const updatedActivity = {
@@ -21,6 +21,12 @@ const EditActivity = ({jwt}) => {
         };
         const result = await updateActivity(jwt, updatedActivity);
         console.log(result)
+        if (result.error) {
+           console.error(result.error);
+            setErrorMessage(result.error); 
+        } else {
+            navigate('./activities')
+        }
     }
 
     return (
@@ -54,6 +60,23 @@ const EditActivity = ({jwt}) => {
             <Button variant='primary' type='submit'>
                 Update
             </Button>
+
+            {
+                errorMessage ? (
+                    <>
+                        {[
+                            'danger',
+                        ].map((variant) => (
+                            <Alert key={variant} variant={variant}>
+                                Oops, Activity Name Already Exists!
+                            </Alert>
+                        ))}
+
+                    </>
+
+                ) : (<></>)
+            }
+
         </Form>
     );
 };

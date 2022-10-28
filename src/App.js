@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
-import { Container } from 'react-bootstrap';
+import { Container} from 'react-bootstrap';
 import { Navbar } from './components';
 import {
   Home,
@@ -72,11 +72,11 @@ const App = () => {
           />
           <Route
             path='/activities'
-            element={<Activities jwt={jwt} user={user} />}
+            element={<Activities jwt={jwt} user={user} navigate={navigate} />}
           />
           <Route
             path='/activities/:activityId'
-            element={<UpdateActivity jwt={jwt} />}
+            element={<UpdateActivity jwt={jwt} navigate={navigate} />}
           />
           <Route path='/register' element={<Register navigate={navigate} />} />
           <Route
