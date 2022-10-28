@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
-import { Navbar, EditRoutine } from './components';
-import { Home, Login, Routines, Activities, Register } from './pages';
 import { Navbar } from './components';
 import {
   Home,
   Login,
   Routines,
+  EditRoutine,
   Activities,
   Register,
   UpdateActivity,
