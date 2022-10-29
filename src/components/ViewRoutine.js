@@ -1,14 +1,5 @@
 import React, { useState } from 'react';
-import {
-  Button,
-  Modal,
-  Form,
-  FloatingLabel,
-  ListGroup,
-  Card,
-  Row,
-  Col,
-} from 'react-bootstrap';
+import { Button, Modal, Form, FloatingLabel, Row, Col } from 'react-bootstrap';
 import RoutineActivities from './RoutineActivities';
 
 const ViewRoutine = ({ routine }) => {
@@ -71,43 +62,7 @@ const ViewRoutine = ({ routine }) => {
             </Col>
           </Form.Group>
 
-          <RoutineActivities
-            // className='border-top border-bottom border-dark'
-            routine={routine}
-          />
-          {/* <Card
-            id='attachedActivities'
-            variant='flush'
-            className='border-top border-bottom border-dark'>
-            <ListGroup.Item className='text-center fs-3 mb-1 bg-light'>
-              Attached Activities
-            </ListGroup.Item>
-            {routine.activities && routine.activities.length ? (
-              <ListGroup id='attachedActivitiesContainer'>
-                {routine.activities.map(activity => {
-                  const { id, name, description, count, duration } = activity;
-                  return (
-                    <ListGroup.Item key={id} className='m-1'>
-                      <Card.Title>Name: {name}</Card.Title>
-                      <Card.Text>Description: {description}</Card.Text>
-                      <Row>
-                        <Col>
-                          <Card.Text>Count: {count}</Card.Text>
-                        </Col>
-                        <Col>
-                          <Card.Text>Duration: {duration}</Card.Text>
-                        </Col>
-                      </Row>
-                    </ListGroup.Item>
-                  );
-                })}
-              </ListGroup>
-            ) : (
-              <Card.Title className='text-center mt-4'>
-                No activities found
-              </Card.Title>
-            )}
-          </Card> */}
+          <RoutineActivities routine={routine} />
 
           <Form.Group className='m-3 d-flex justify-content-end'>
             <Button

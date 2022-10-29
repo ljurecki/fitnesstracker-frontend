@@ -1,11 +1,22 @@
 import React, { useEffect, useState } from 'react';
-import { getRoutinesByUsername, getPublicRoutines } from '../api';
+import {
+  getRoutinesByUsername,
+  getPublicRoutines,
+  deleteRoutine,
+} from '../api';
 import { MyRoutines, PublicRoutines, CreateRoutine } from '../components';
 import { Tabs, Tab } from 'react-bootstrap';
 
 const Routines = ({ user, jwt, isLoggedIn }) => {
   const [publicRoutines, setPublicRoutines] = useState([]);
   const [myRoutines, setMyRoutines] = useState([]);
+
+  const fetchAllRoutines = async () => {
+    fetchPublicRoutines();
+    if (isLoggedIn) {
+      fetchMyRoutines(user, jwt);
+    }
+  };
 
   const fetchPublicRoutines = async () => {
     setPublicRoutines(await getPublicRoutines());
@@ -15,11 +26,17 @@ const Routines = ({ user, jwt, isLoggedIn }) => {
     setMyRoutines(await getRoutinesByUsername(user, jwt));
   };
 
-  useEffect(() => {
-    fetchPublicRoutines();
-    if (isLoggedIn) {
-      fetchMyRoutines(user, jwt);
+  const deleteSelectedRoutine = async routine => {
+    const result = await deleteRoutine(routine, jwt);
+    if (!result.error) {
+      fetchAllRoutines();
+    } else {
+      console.error(result.error);
     }
+  };
+
+  useEffect(() => {
+    fetchAllRoutines();
   }, [user]);
 
   return (
@@ -35,19 +52,21 @@ const Routines = ({ user, jwt, isLoggedIn }) => {
             publicRoutines={publicRoutines}
             isLoggedIn={isLoggedIn}
             user={user}
+            deleteSelectedRoutine={deleteSelectedRoutine}
           />
         </Tab>
         {isLoggedIn && (
           <Tab eventKey='my-routines' title='My Routines'>
-            <MyRoutines myRoutines={myRoutines} />
+            <MyRoutines
+              myRoutines={myRoutines}
+              deleteSelectedRoutine={deleteSelectedRoutine}
+            />
           </Tab>
         )}
       </Tabs>
 
       {isLoggedIn && (
-        <CreateRoutine
-          jwt={jwt}
-        />
+        <CreateRoutine jwt={jwt} fetchAllRoutines={fetchAllRoutines} />
       )}
     </>
   );

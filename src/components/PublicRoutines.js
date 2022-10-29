@@ -3,7 +3,12 @@ import { Link } from 'react-router-dom';
 import { ListGroup, Card, Button, ButtonGroup } from 'react-bootstrap';
 import ViewRoutine from './ViewRoutine';
 
-const PublicRoutines = ({ publicRoutines, isLoggedIn, user }) => {
+const PublicRoutines = ({
+  publicRoutines,
+  isLoggedIn,
+  user,
+  deleteSelectedRoutine,
+}) => {
   return (
     <ListGroup variant='flush'>
       {/* <InputGroup className='p-2 text-white bg-dark'>
@@ -34,7 +39,15 @@ const PublicRoutines = ({ publicRoutines, isLoggedIn, user }) => {
                         Edit
                       </Button>
                     </Link>
-                    <Button variant='danger'>Delete</Button>
+                    <Button
+                      variant='danger'
+                      onClick={() => {
+                        if (confirm('Are you sure you want to delete?')) {
+                          deleteSelectedRoutine(routine);
+                        }
+                      }}>
+                      Delete
+                    </Button>
                   </>
                 )}
               </ButtonGroup>

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { ListGroup, Button, Card, ButtonGroup } from 'react-bootstrap';
 import { ViewRoutine } from './';
 
-const MyRoutines = ({ myRoutines }) => {
+const MyRoutines = ({ myRoutines, deleteSelectedRoutine }) => {
   return (
     <ListGroup variant='flush'>
       {myRoutines && myRoutines.length ? (
@@ -26,7 +26,11 @@ const MyRoutines = ({ myRoutines }) => {
 
                 <Button
                   variant='danger'
-                  onClick={() => confirm('Are you sure?')}>
+                  onClick={() => {
+                    if (confirm('Are you sure you want to delete?')) {
+                      deleteSelectedRoutine(routine);
+                    }
+                  }}>
                   Delete
                 </Button>
               </ButtonGroup>
