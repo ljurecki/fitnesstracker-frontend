@@ -123,6 +123,18 @@ export const updateRoutine = async (updatedRoutine, jwt) => {
   }
 };
 
+export const deleteRoutine = async (routine, jwt) => {
+  try {
+    const headers = createHeaders(jwt);
+    return await fetch(`${BASE_URL}/routines/${routine.id}`, {
+      method: 'DELETE',
+      headers,
+    }).then(response => response.json());
+  } catch (err) {
+    console.error(err);
+  }
+};
+
 export const attachActivity = async (activity, routine, jwt) => {
   try {
     const headers = createHeaders(jwt);

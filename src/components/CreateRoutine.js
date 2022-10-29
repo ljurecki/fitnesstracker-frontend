@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { createRoutine } from '../api';
 import { Button, Modal, Form, FloatingLabel, Alert } from 'react-bootstrap';
 
-const CreateRoutine = ({ jwt }) => {
+const CreateRoutine = ({ jwt, fetchAllRoutines }) => {
   const [showModal, setShowModal] = useState(false);
 
   const [name, setName] = useState('');
@@ -13,6 +13,7 @@ const CreateRoutine = ({ jwt }) => {
 
   const openModal = () => {
     setErrorMessage('');
+    setSuccessMessage('');
     setShowModal(true);
   };
   const closeModal = () => {
@@ -32,9 +33,9 @@ const CreateRoutine = ({ jwt }) => {
     if (!response.error) {
       setSuccessMessage('Routine Created!');
       setTimeout(() => {
-        closeModal();;
+        closeModal();
+        fetchAllRoutines();
       }, 1000);
-
     } else {
       console.error(response.error);
       setErrorMessage(response.error);
