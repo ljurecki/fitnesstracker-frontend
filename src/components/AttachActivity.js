@@ -161,9 +161,7 @@ const AttachActivity = ({ routine, jwt, user, setCurrentRoutine }) => {
                 />
               </FloatingLabel>
             </Col>
-            {/* </Form.Group>
 
-          <Form.Group className='m-3'> */}
             <Col className='ps-1 pe-0'>
               <FloatingLabel label='Duration'>
                 <Form.Control
@@ -177,18 +175,6 @@ const AttachActivity = ({ routine, jwt, user, setCurrentRoutine }) => {
             </Col>
           </Form.Group>
 
-          {/* <Form.Group className='m-3'>
-            <Form.Check
-              id='routineIsPublic'
-              type='checkbox'
-              label='Public'
-              onChange={e => {
-                setNewIsPublic(e.target.checked);
-              }}
-              checked={newIsPublic}
-            />
-          </Form.Group> */}
-
           <Form.Group className='m-3 d-flex justify-content-end'>
             <Button variant='success' onClick={() => handleSubmit()}>
               Add Activity
@@ -196,7 +182,6 @@ const AttachActivity = ({ routine, jwt, user, setCurrentRoutine }) => {
 
           </Form.Group>
         </Form>
-        {/* </Card> */}
         {errorMessage && (
           <Alert variant='danger'>
             {errorMessage}
