@@ -1,10 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {
-  attachActivity,
-  getAllActivities,
-  getRoutinesByUsername,
-  updateRoutine,
-} from '../api';
+import { attachActivity, getAllActivities } from '../api';
 import {
   Form,
   FloatingLabel,
@@ -13,10 +8,10 @@ import {
   Row,
   Col,
   Dropdown,
-  Alert
+  Alert,
 } from 'react-bootstrap';
 
-const AttachActivity = ({ routine, jwt, user, setCurrentRoutine }) => {
+const AttachActivity = ({ routine, jwt, updateCurrentRoutine }) => {
   const [showModal, setShowModal] = useState(false);
   const openModal = () => setShowModal(true);
   const closeModal = () => setShowModal(false);
@@ -34,14 +29,6 @@ const AttachActivity = ({ routine, jwt, user, setCurrentRoutine }) => {
 
   const fetchActivityList = async () => {
     setActivityList(await getAllActivities());
-  };
-
-  const updateCurrentRoutine = async () => {
-    const updatedRoutines = await getRoutinesByUsername(user, jwt);
-    const [updatedRoutine] = updatedRoutines.filter(
-      _routine => _routine.id === routine.id
-    );
-    setCurrentRoutine(updatedRoutine);
   };
 
   useEffect(() => {
@@ -78,7 +65,7 @@ const AttachActivity = ({ routine, jwt, user, setCurrentRoutine }) => {
         onClick={() => {
           setSuccessMessage('');
           setDuration('');
-          setCount('')
+          setCount('');
           setSelectedActivityName('');
           setSelectedActivity('');
           setErrorMessage('');
@@ -193,15 +180,10 @@ const AttachActivity = ({ routine, jwt, user, setCurrentRoutine }) => {
             <Button variant='success' onClick={() => handleSubmit()}>
               Add Activity
             </Button>
-
           </Form.Group>
         </Form>
         {/* </Card> */}
-        {errorMessage && (
-          <Alert variant='danger'>
-            {errorMessage}
-          </Alert>
-        )}
+        {errorMessage && <Alert variant='danger'>{errorMessage}</Alert>}
         {successMessage && (
           <Alert variant='success' className='mt-3'>
             {successMessage}

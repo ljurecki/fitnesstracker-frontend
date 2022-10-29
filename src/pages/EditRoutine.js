@@ -1,14 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import {
-  Button,
-  Card,
-  FloatingLabel,
-  Form,
-  Alert,
-  Container,
-} from 'react-bootstrap';
-import { updateRoutine } from '../api';
+import { Button, Card, FloatingLabel, Form, Alert } from 'react-bootstrap';
+import { updateRoutine, getRoutinesByUsername } from '../api';
 import { AttachActivity, RoutineActivities } from '../components';
 
 const EditRoutine = ({ navigate, jwt, user }) => {
@@ -22,6 +15,14 @@ const EditRoutine = ({ navigate, jwt, user }) => {
   const [newName, setNewName] = useState(name);
   const [newGoal, setNewGoal] = useState(goal);
   const [newIsPublic, setNewIsPublic] = useState(isPublic);
+
+  const updateCurrentRoutine = async () => {
+    const updatedRoutines = await getRoutinesByUsername(user, jwt);
+    const [_updatedRoutine] = updatedRoutines.filter(
+      _routine => _routine.id === routine.id
+    );
+    setCurrentRoutine(_updatedRoutine);
+  };
 
   const handleSubmit = async () => {
     const updatedRoutine = {
@@ -99,8 +100,9 @@ const EditRoutine = ({ navigate, jwt, user }) => {
             <AttachActivity
               routine={currentRoutine}
               jwt={jwt}
-              user={user}
-              setCurrentRoutine={setCurrentRoutine}
+              // user={user}
+              updateCurrentRoutine={updateCurrentRoutine}
+              // setCurrentRoutine={setCurrentRoutine}
             />
             <Button variant='success' type='submit' className='mx-2'>
               Save & Exit
@@ -120,7 +122,12 @@ const EditRoutine = ({ navigate, jwt, user }) => {
       </Card>
 
       <div className='p-0 mt-4 mx-4 shadow'>
-        <RoutineActivities routine={currentRoutine} jwt={jwt} />
+        <RoutineActivities
+          routine={currentRoutine}
+          jwt={jwt}
+          updateCurrentRoutine={updateCurrentRoutine}
+          user={user}
+        />
       </div>
     </>
   );
