@@ -6,19 +6,6 @@
   overflow: scroll;
 }
 
-.pageHeader {
-  background-color: #0D6EFD;
-  padding: 1px;
-}
-
-p.pageHeading {
-  font-size: 25px;
-  color: white;
-  text-align: center;
-  margin: auto;
-  padding: 7px;
-}
-
 #hpTitle {
   font-size: 48px;
   text-align: center;
@@ -27,5 +14,5 @@ p.pageHeading {
 }
 
 .nav-link:hover {
-  color: #0D6EFD !important;
+  color: #fff !important;
 }

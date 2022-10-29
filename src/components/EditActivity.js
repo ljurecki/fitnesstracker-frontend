@@ -9,6 +9,7 @@ const EditActivity = ({ jwt, navigate }) => {
     const { id, name, description } = activity
 
     const [errorMessage, setErrorMessage] = useState('');
+    const [successMessage, setSuccessMessage] = useState('');
 
     const [newName, setNewName] = useState(name);
     const [newDescription, setNewDescription] = useState(description);
@@ -25,12 +26,15 @@ const EditActivity = ({ jwt, navigate }) => {
             console.error(result.error);
             setErrorMessage(result.error);
         } else {
-            navigate('./activities')
+            setSuccessMessage('Activity Updated!');
+            setTimeout(() => {
+                navigate('./activities')
+            }, 1000);
         }
     }
 
-    return (
-        <>
+        return (
+            <>
             <Card className='flex-fill mt-3 mx-5 shadow'>
                 <Card.Header as='h3' className='text-center' style={{ backgroundColor: "#0D6EFD", color: "#fff" }}>
                     Update Activity
@@ -77,27 +81,20 @@ const EditActivity = ({ jwt, navigate }) => {
                             Cancel
                         </Button>
                     </Form.Group>
-                    {
-                        errorMessage ? (
-                            <>
-                                {[
-                                    'danger',
-                                ].map((variant) => (
-                                    <Alert key={variant} variant={variant}>
-                                        Oops, Activity Name Already Exists!
-                                    </Alert>
-                                ))}
-
-                            </>
-
-                        ) : (<></>)
-                    }
-
+                    {errorMessage && (
+                        <Alert variant='danger' className='mt-3'>
+                            {errorMessage}
+                        </Alert>
+                    )}
+                    {successMessage && (
+                        <Alert variant='success' className='mt-3'>
+                            {successMessage}
+                        </Alert>
+                    )}
                 </Form>
             </Card>
-        </>
-    );
-};
+            </>
+        );
+    };
 
 export default EditActivity;
-

@@ -6,10 +6,12 @@ const RegisterForm = ({ navigate }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
 
   const registerUser = async () => {
     const results = await register(username, password);
     if (!results.error) {
+      setSuccessMessage('Welcome to Fitness Tracker!');
       setErrorMessage('');
       setTimeout(() => {
         navigate('/login');
@@ -19,8 +21,6 @@ const RegisterForm = ({ navigate }) => {
       setErrorMessage(results.error);
     }
   };
-
-  //Show success on register, then redirect after 3 seconds
 
   return (
     <Form
@@ -64,6 +64,11 @@ const RegisterForm = ({ navigate }) => {
         {errorMessage && (
           <Alert variant='danger' className='mt-3'>
             {errorMessage}
+          </Alert>
+        )}
+        {successMessage && (
+          <Alert variant='success' className='mt-3'>
+            {successMessage}
           </Alert>
         )}
       </Form.Group>

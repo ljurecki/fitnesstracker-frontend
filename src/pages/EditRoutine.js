@@ -10,6 +10,7 @@ const EditRoutine = ({ navigate, jwt, user }) => {
   const [currentRoutine, setCurrentRoutine] = useState(routine);
   const { id, name, goal, isPublic } = currentRoutine;
   const [errorMessage, setErrorMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
 
   const [newName, setNewName] = useState(name);
   const [newGoal, setNewGoal] = useState(goal);
@@ -24,8 +25,10 @@ const EditRoutine = ({ navigate, jwt, user }) => {
     };
     const result = await updateRoutine(updatedRoutine, jwt);
     if (!result.error) {
-      setErrorMessage('');
-      navigate('/routines');
+      setSuccessMessage('Routine Updated!');
+      setTimeout(() => {
+        navigate('/routines');
+      }, 1000);
     } else {
       console.error(result.error);
       setErrorMessage(result.error);
@@ -94,12 +97,16 @@ const EditRoutine = ({ navigate, jwt, user }) => {
             <Button variant='success' type='submit' className='mx-2'>
               Save & Exit
             </Button>
-            {/* <Button variant='secondary' onClick={() => navigate('/routines')}>
-              Cancel
-            </Button> */}
           </Form.Group>
           {errorMessage && (
-            <Alert variant='danger'>Sorry, Routine Name Already Exists!</Alert>
+            <Alert variant='danger' className='mt-3'>
+              {errorMessage}
+            </Alert>
+          )}
+          {successMessage && (
+            <Alert variant='success' className='mt-3'>
+              {successMessage}
+            </Alert>
           )}
         </Form>
       </Card>
