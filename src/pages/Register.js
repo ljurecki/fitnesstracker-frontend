@@ -4,10 +4,16 @@ import { RegisterForm } from '../components';
 
 const Register = ({ navigate }) => {
   return (
+    <>
+      <div className='pageHeader'>
+        <p className='pageHeading'>
+          Register!
+        </p>
+      </div>
     <Container>
-      <h1>Register Here</h1>
       <RegisterForm navigate={navigate} />
     </Container>
+    </>
   );
 };
 

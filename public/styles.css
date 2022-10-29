@@ -6,15 +6,26 @@
   overflow: scroll;
 }
 
-.activityHeader {
+.pageHeader {
   background-color: #0D6EFD;
   padding: 1px;
 }
 
-p.activityHeading {
+p.pageHeading {
   font-size: 25px;
   color: white;
   text-align: center;
   margin: auto;
   padding: 7px;
+}
+
+#hpTitle {
+  font-size: 48px;
+  text-align: center;
+  padding: 3%;
+  color: #9B9D9E;
+}
+
+.nav-link:hover {
+  color: #0D6EFD !important;
 }

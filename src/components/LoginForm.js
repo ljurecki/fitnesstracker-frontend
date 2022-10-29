@@ -31,18 +31,16 @@ const LoginForm = ({ navigate, setJwt }) => {
         e.preventDefault();
         loginUser();
       }}>
-      <Form.Group className='mb-3'>
-        <Form.Label>Username</Form.Label>
+      <Form.Group className='mb-3' style={{ margin: "3% 25% 0px 25%" }}>
         <Form.Control
-          placeholder='Enter username'
+          placeholder='Username'
           onChange={e => {
             setUsername(e.target.value);
           }}
         />
       </Form.Group>
 
-      <Form.Group className='mb-3'>
-        <Form.Label>Password</Form.Label>
+      <Form.Group className='mb-3' style={{ margin: "2% 25% 0px 25%" }}>
         <Form.Control
           type='password'
           placeholder='Password'
@@ -51,13 +49,19 @@ const LoginForm = ({ navigate, setJwt }) => {
           }}
         />
       </Form.Group>
-      <Button variant='primary' type='submit'>
-        Submit
-      </Button>
-      <Button variant='success' onClick={() => navigate('/register')}>
-        Register
-      </Button>
-
+      <Form.Group style={{ margin: "2% 25% 0px 25%" }}>
+        <Button variant='success'
+          type='submit'
+          className='mx-2 justify-self-end'>
+          Submit
+        </Button>
+        <Button variant='primary'
+          className='mx-2 justify-self-end'
+          onClick={() =>
+            navigate('/register')}>
+          Register
+        </Button>
+      </Form.Group>
       {
         errorMessage ? (
           <>
@@ -65,7 +69,7 @@ const LoginForm = ({ navigate, setJwt }) => {
               'danger',
             ].map((variant) => (
               <Alert key={variant} variant={variant}>
-               Username or Password is Incorrect. Please Try Again!
+                Username or Password is Incorrect. Please Try Again!
               </Alert>
             ))}
 

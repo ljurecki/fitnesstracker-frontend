@@ -47,7 +47,7 @@ const CreateRoutine = ({ jwt }) => {
       </Button>
 
       <Modal show={showModal} onHide={closeModal}>
-        <Modal.Header style={{ fontSize: '20px' }}>
+        <Modal.Header style={{ fontSize: '20px' }} closeButton>
           <Modal.Title className='w-100 text-center'>New Routine</Modal.Title>
         </Modal.Header>
         <Form
@@ -97,12 +97,12 @@ const CreateRoutine = ({ jwt }) => {
             <Button variant='success' type='submit'>
               Create Routine
             </Button>
-            <Button
+            {/* <Button
               variant='secondary'
               className='mx-2 justify-self-end'
               onClick={() => closeModal()}>
               Close
-            </Button>
+            </Button> */}
           </Form.Group>
           {
                 errorMessage ? (

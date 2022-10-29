@@ -4,10 +4,16 @@ import { LoginForm } from '../components';
 
 const Login = ({ navigate, setJwt }) => {
   return (
-    <Container>
-      <h1>Login</h1>
-      <LoginForm navigate={navigate} setJwt={setJwt} />
-    </Container>
+    <>
+      <div className='pageHeader'>
+        <p className='pageHeading'>
+          Welcome Back, Log In!
+        </p>
+      </div>
+      <Container>
+        <LoginForm navigate={navigate} setJwt={setJwt} />
+      </Container>
+    </>
   );
 };
 

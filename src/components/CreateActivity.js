@@ -7,6 +7,7 @@ const ActivityForm = ({ jwt, user, navigate }) => {
   const [description, setDescription] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
+
   async function addActivity() {
     const newActivity = {
       name,
@@ -22,8 +23,6 @@ const ActivityForm = ({ jwt, user, navigate }) => {
   }
 
   return (
-
-
     <Form
       id='forms'
       onSubmit={event => {
@@ -46,6 +45,7 @@ const ActivityForm = ({ jwt, user, navigate }) => {
         </Form.Label>
         <Form.Control
           placeholder=''
+          as='textarea'
           style={{ height: '80px' }}
           onChange={e => {
             setDescription(e.target.value);
@@ -54,7 +54,6 @@ const ActivityForm = ({ jwt, user, navigate }) => {
       </Form.Group>
       <FormGroup className='m-3 d-flex justify-content-end'>
         <Button variant='success'
-          className='mx-2 justify-self-end'
           type='submit'
           onClick={(event) => {
             event.preventDefault();
@@ -62,12 +61,6 @@ const ActivityForm = ({ jwt, user, navigate }) => {
           }}>
           Create Activity
         </Button>
-        <Button
-              variant='secondary'
-              className='mx-2 justify-self-end'
-              onClick={() => closeModal()}>
-              Close
-            </Button>
       </FormGroup>
       {
         errorMessage ? (
@@ -76,7 +69,7 @@ const ActivityForm = ({ jwt, user, navigate }) => {
               'danger',
             ].map((variant) => (
               <Alert key={variant} variant={variant}>
-                Sorry, Activity Name Already Exists!
+                Sorry, Activity Name Already Exists or is Not Valid!
               </Alert>
             ))}
 

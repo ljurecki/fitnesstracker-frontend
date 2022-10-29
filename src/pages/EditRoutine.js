@@ -32,7 +32,7 @@ const EditRoutine = ({ navigate, jwt }) => {
   return (
     <>
       <Card className='flex-fill mt-3 mx-5 shadow'>
-        <Card.Header as='h3' className='text-center'>
+        <Card.Header as='h3' className='text-center' style={{backgroundColor: "#0D6EFD", color: "#fff"}}>
           Edit Routine
         </Card.Header>
         <Form

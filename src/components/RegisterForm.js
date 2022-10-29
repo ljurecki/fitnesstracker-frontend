@@ -26,40 +26,49 @@ const RegisterForm = ({ navigate }) => {
         event.preventDefault();
         registerUser();
       }}>
-      <Form.Group className='mb-3'>
-        <Form.Label>Create Username</Form.Label>
+      <Form.Group className='mb-3' style={{ margin: "3% 25% 0px 25%" }}>
         <Form.Control
-          placeholder='Enter username'
+          placeholder='Create username'
           onChange={e => {
             setUsername(e.target.value);
           }}
         />
       </Form.Group>
 
-      <Form.Group className='mb-3'>
-        <Form.Label>Create Password</Form.Label>
+      <Form.Group className='mb-3' style={{ margin: "2% 25% 0px 25%" }}>
         <Form.Control
           type='password'
-          placeholder='Enter Password'
+          placeholder='Create Password'
           onChange={e => {
             setPassword(e.target.value);
           }}
         />
+      </Form.Group >
+      <Form.Group
+        style={{ margin: "2% 25% 0px 25%" }}>
+        <Button
+          variant='success'
+          type='submit'
+          className='mx-2 justify-self-end'>
+          Submit
+        </Button>
+        <Button variant='secondary'
+          className='mx-2 justify-self-end'
+          onClick={() =>
+            navigate('/login')}>
+          Cancel
+        </Button>
       </Form.Group>
-      <Button variant='primary' type='submit'>
-        Submit
-      </Button>
-      <Button variant='secondary' onClick={() => navigate('/login')}>
-        Cancel
-      </Button>
       {
         errorMessage ? (
           <>
             {[
               'danger',
             ].map((variant) => (
-              <Alert key={variant} variant={variant}>
-               Password must be at least 8 characters long!
+              <Alert
+                key={variant}
+                variant={variant}>
+                Password must be at least 8 characters long!
               </Alert>
             ))}
 
