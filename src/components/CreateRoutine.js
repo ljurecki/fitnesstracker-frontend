@@ -10,7 +10,10 @@ const CreateRoutine = ({ jwt }) => {
   const [isPublic, setIsPublic] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
-  const openModal = () => setShowModal(true);
+  const openModal = () => {
+    setErrorMessage('');
+    setShowModal(true);
+  };
   const closeModal = () => {
     setShowModal(false);
     setName('');
@@ -29,7 +32,7 @@ const CreateRoutine = ({ jwt }) => {
       closeModal();
     } else {
       console.error(response.error);
-      setErrorMessage(response.error); 
+      setErrorMessage(response.error);
     }
   };
 
@@ -97,28 +100,12 @@ const CreateRoutine = ({ jwt }) => {
             <Button variant='success' type='submit'>
               Create Routine
             </Button>
-            {/* <Button
-              variant='secondary'
-              className='mx-2 justify-self-end'
-              onClick={() => closeModal()}>
-              Close
-            </Button> */}
           </Form.Group>
-          {
-                errorMessage ? (
-                    <>
-                        {[
-                            'danger',
-                        ].map((variant) => (
-                            <Alert key={variant} variant={variant}>
-                                Sorry, Routine Name Already Exists!
-                            </Alert>
-                        ))}
-
-                    </>
-
-                ) : (<></>)
-            }
+          {errorMessage && (
+            <Alert variant='danger' className='mt-3'>
+              Sorry, Routine Name Already Exists!
+            </Alert>
+          )}
         </Form>
       </Modal>
     </>

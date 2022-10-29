@@ -22,13 +22,12 @@ const Activities = ({ jwt, user }) => {
   return (
     <>
       <div className='pageHeader'>
-        <p className='pageHeading'>
-          Activities
-        </p>
+        <p className='pageHeading'>Activities</p>
       </div>
       <ListGroup variant='flush'>
         {jwt ? (
-          <Button variant='success'
+          <Button
+            variant='success'
             className='position-fixed sticky-bottom rounded-pill shadow'
             size='lg'
             style={{ bottom: '25px', right: '25px' }}
@@ -41,11 +40,12 @@ const Activities = ({ jwt, user }) => {
 
         <Modal show={show} onHide={handleClose}>
           <Modal.Header style={{ fontSize: '20px' }} closeButton>
-            <Modal.Title className='w-100 text-center'>Create Activity</Modal.Title>
+            <Modal.Title className='w-100 text-center'>
+              Create Activity
+            </Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <ActivityForm user={user} jwt={jwt} />
-            {' '}
           </Modal.Body>
         </Modal>
 
@@ -58,9 +58,7 @@ const Activities = ({ jwt, user }) => {
                 <Card.Text>Description: {description}</Card.Text>
                 {jwt ? (
                   <Link to={`/activities/${id}`} state={{ activity: activity }}>
-                    <Button variant='info'>
-                      Edit
-                    </Button>
+                    <Button variant='info'>Edit</Button>
                   </Link>
                 ) : null}
               </ListGroup.Item>
@@ -76,8 +74,8 @@ const Activities = ({ jwt, user }) => {
 
 export default Activities;
 
-
-{/* <div key={id}>
+{
+  /* <div key={id}>
   <h1>{name}</h1>
   <h3>Description:</h3> <p>{description}</p>
   {jwt ? (
@@ -88,4 +86,5 @@ export default Activities;
     </Link>
 
   ) : null}
-</div> */}
+</div> */
+}

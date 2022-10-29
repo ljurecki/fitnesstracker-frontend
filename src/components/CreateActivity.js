@@ -7,7 +7,6 @@ const ActivityForm = ({ jwt, user, navigate }) => {
   const [description, setDescription] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
-
   async function addActivity() {
     const newActivity = {
       name,
@@ -18,7 +17,7 @@ const ActivityForm = ({ jwt, user, navigate }) => {
       console.error(result.error);
       setErrorMessage(result.error);
     } else {
-      navigate('./activities')
+      navigate('./activities');
     }
   }
 
@@ -40,9 +39,7 @@ const ActivityForm = ({ jwt, user, navigate }) => {
       </Form.Group>
 
       <Form.Group className='mb-3'>
-        <Form.Label>
-          Description
-        </Form.Label>
+        <Form.Label>Description</Form.Label>
         <Form.Control
           placeholder=''
           as='textarea'
@@ -52,31 +49,22 @@ const ActivityForm = ({ jwt, user, navigate }) => {
           }}
         />
       </Form.Group>
-      <FormGroup className='m-3 d-flex justify-content-end'>
-        <Button variant='success'
+      <Form.Group className='m-3 d-flex justify-content-end'>
+        <Button
+          variant='success'
           type='submit'
-          onClick={(event) => {
+          onClick={event => {
             event.preventDefault();
-            addActivity()
+            addActivity();
           }}>
           Create Activity
         </Button>
-      </FormGroup>
-      {
-        errorMessage ? (
-          <>
-            {[
-              'danger',
-            ].map((variant) => (
-              <Alert key={variant} variant={variant}>
-                Sorry, Activity Name Already Exists or is Not Valid!
-              </Alert>
-            ))}
-
-          </>
-
-        ) : (<></>)
-      }
+      </Form.Group>
+      {errorMessage && (
+        <Alert variant='danger'>
+          Sorry, Activity Name Already Exists or is Not Valid!
+        </Alert>
+      )}
     </Form>
   );
 };
