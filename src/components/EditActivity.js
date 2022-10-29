@@ -27,6 +27,7 @@ const EditActivity = ({ jwt, navigate }) => {
             setErrorMessage(result.error);
         } else {
             setSuccessMessage('Activity Updated!');
+            setErrorMessage('');
             setTimeout(() => {
                 navigate('./activities')
             }, 1000);

@@ -32,6 +32,7 @@ const CreateRoutine = ({ jwt, fetchAllRoutines }) => {
     const response = await createRoutine(routine, jwt);
     if (!response.error) {
       setSuccessMessage('Routine Created!');
+      setErrorMessage('');
       setTimeout(() => {
         closeModal();
         fetchAllRoutines();

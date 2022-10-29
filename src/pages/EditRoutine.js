@@ -33,6 +33,7 @@ const EditRoutine = ({ navigate, jwt, user }) => {
     const result = await updateRoutine(updatedRoutine, jwt);
     if (!result.error) {
       setSuccessMessage('Routine Updated!');
+      setErrorMessage('');
       setTimeout(() => {
         navigate('/routines');
       }, 1000);
