@@ -8,51 +8,57 @@ import img5 from '../images/pexels-mart-production-7880002.jpg'
 import img6 from '../images/pexels-timothy-yiadom-14075416.jpg'
 
 const Home = () => {
-  
+
   return (
     <>
-    <div >
-      <h1 id="hpTitle">Share Your Fitness Activities and Routines</h1>
-    </div>
-  
-  <Container>
-      <Row>
-        <Col xl={true}>
-        <img src={img1}
-         style={{ width: "95%"}} 
-         />
+      <div >
+        <h1 style={{
+          fontSize: "48px",
+          textAlign: "center",
+          padding: "3%",
+          color: "#9B9D9E"
+        }} >
+          Share Your Fitness Activities and Routines</h1>
+      </div>
+
+      <Container>
+        <Row>
+          <Col xl={true}>
+            <img src={img1}
+              style={{ width: "95%" }}
+            />
           </Col>
-        <Col xl={true}>
-        <img src={img2}
-         style={{ width: "95%"}} 
-         />
-        </Col>
-        <Col xl={true}>
-        <img src={img3}
-         style={{ width: "95%"}} 
-         />
-        </Col>
-      </Row>
-      <Row style={{paddingTop:"2rem"}}>
-        <Col xl={true}>
-        <img src={img4}
-         style={{ width: "95%"}} 
-         />
-        </Col>
-        <Col xl={true}>
-        <img src={img5}
-         style={{ width: "95%"}} 
-         />
-        </Col>
-        <Col xl={true}>
-        <img src={img6}
-         style={{ width: "95%"}} 
-         />
-        </Col>
-      </Row>
-    </Container>
-  
-  </>
+          <Col xl={true}>
+            <img src={img2}
+              style={{ width: "95%" }}
+            />
+          </Col>
+          <Col xl={true}>
+            <img src={img3}
+              style={{ width: "95%" }}
+            />
+          </Col>
+        </Row>
+        <Row style={{ paddingTop: "2rem" }}>
+          <Col xl={true}>
+            <img src={img4}
+              style={{ width: "95%" }}
+            />
+          </Col>
+          <Col xl={true}>
+            <img src={img5}
+              style={{ width: "95%" }}
+            />
+          </Col>
+          <Col xl={true}>
+            <img src={img6}
+              style={{ width: "95%" }}
+            />
+          </Col>
+        </Row>
+      </Container>
+
+    </>
   )
 };
 

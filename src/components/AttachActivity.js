@@ -50,7 +50,7 @@ const AttachActivity = ({ routine, jwt, user, setCurrentRoutine }) => {
 
   const handleSubmit = async () => {
     if (!count || !duration) {
-      console.error(result.error);
+      console.error('Please set a count and duration for this activity');
       setErrorMessage('Please set a count and duration for this activity');
       return;
     }
@@ -58,8 +58,10 @@ const AttachActivity = ({ routine, jwt, user, setCurrentRoutine }) => {
     selectedActivity.count = count;
     selectedActivity.duration = duration;
     const result = await attachActivity(activity, routine, jwt);
+
     if (!result.error) {
       setSuccessMessage('Activity Added!');
+      setErrorMessage('');
       setTimeout(() => {
         closeModal();
         updateCurrentRoutine();
@@ -74,6 +76,12 @@ const AttachActivity = ({ routine, jwt, user, setCurrentRoutine }) => {
     <>
       <Button
         onClick={() => {
+          setSuccessMessage('');
+          setDuration('');
+          setCount('')
+          setSelectedActivityName('');
+          setSelectedActivity('');
+          setErrorMessage('');
           openModal();
         }}>
         Add Activity

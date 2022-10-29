@@ -6,13 +6,6 @@
   overflow: scroll;
 }
 
-#hpTitle {
-  font-size: 48px;
-  text-align: center;
-  padding: 3%;
-  color: #9B9D9E;
-}
-
 .nav-link:hover {
   color: #fff !important;
 }
