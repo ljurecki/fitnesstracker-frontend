@@ -10,6 +10,7 @@ const RegisterForm = ({ navigate }) => {
   const registerUser = async () => {
     const results = await register(username, password);
     if (!results.error) {
+
       navigate('/login');
     } else {
       console.error(results.error);

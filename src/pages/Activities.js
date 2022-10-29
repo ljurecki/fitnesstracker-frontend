@@ -45,7 +45,6 @@ const Activities = ({ jwt, user }) => {
           </Modal.Header>
           <Modal.Body>
             <ActivityForm user={user} jwt={jwt} />
-            {' '}
           </Modal.Body>
         </Modal>
 

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Form, Button, Alert, FormGroup } from 'react-bootstrap';
+import { Form, Button, Alert, FloatingLabel } from 'react-bootstrap';
 import { createActivity } from '../api';
 
 const ActivityForm = ({ jwt, user, navigate }) => {
@@ -30,29 +30,28 @@ const ActivityForm = ({ jwt, user, navigate }) => {
         addActivity();
       }}>
       <Form.Group className='mb-3'>
-        <Form.Label>Activity Name</Form.Label>
-        <Form.Control
-          placeholder=''
-          onChange={e => {
-            setName(e.target.value);
-          }}
-        />
+        <FloatingLabel label='Name'>
+          <Form.Control
+            placeholder=''
+            onChange={e => {
+              setName(e.target.value);
+            }}
+          />
+        </FloatingLabel>
       </Form.Group>
-
       <Form.Group className='mb-3'>
-        <Form.Label>
-          Description
-        </Form.Label>
-        <Form.Control
-          placeholder=''
-          as='textarea'
-          style={{ height: '80px' }}
-          onChange={e => {
-            setDescription(e.target.value);
-          }}
-        />
+        <FloatingLabel label='Description'>
+          <Form.Control
+            placeholder=''
+            as='textarea'
+            style={{ height: '80px' }}
+            onChange={e => {
+              setDescription(e.target.value);
+            }}
+          />
+        </FloatingLabel>
       </Form.Group>
-      <FormGroup className='m-3 d-flex justify-content-end'>
+      <Form.Group className='m-3 d-flex justify-content-end'>
         <Button variant='success'
           type='submit'
           onClick={(event) => {
@@ -61,7 +60,7 @@ const ActivityForm = ({ jwt, user, navigate }) => {
           }}>
           Create Activity
         </Button>
-      </FormGroup>
+      </Form.Group>
       {
         errorMessage ? (
           <>
