@@ -25,7 +25,7 @@ const ActivityForm = ({ jwt, user}) => {
     } else {
       setSuccessMessage('Activity Created!');
       setTimeout(() => {
-        handleClose();;
+        handleClose();
       }, 1000);
     }
   }
