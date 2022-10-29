@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
-import { Container} from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 import { Navbar } from './components';
 import {
   Home,
@@ -66,9 +66,7 @@ const App = () => {
           />
           <Route
             path='/routines/:routineId'
-            element={
-              <EditRoutine navigate={navigate} jwt={jwt} /* user={user}   */ />
-            }
+            element={<EditRoutine navigate={navigate} jwt={jwt} user={user} />}
           />
           <Route
             path='/activities'

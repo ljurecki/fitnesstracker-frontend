@@ -123,6 +123,23 @@ export const updateRoutine = async (updatedRoutine, jwt) => {
   }
 };
 
+export const attachActivity = async (activity, routine, jwt) => {
+  try {
+    const headers = createHeaders(jwt);
+    return await fetch(`${BASE_URL}/routines/${routine.id}/activities`, {
+      method: 'POST',
+      headers,
+      body: JSON.stringify({
+        activityId: activity.id,
+        count: activity.count,
+        duration: activity.duration,
+      }),
+    }).then(response => response.json());
+  } catch (err) {
+    console.error(err);
+  }
+};
+
 export const createActivity = async (jwt, user, { name, description }) => {
   try {
     const headers = createHeaders(jwt);

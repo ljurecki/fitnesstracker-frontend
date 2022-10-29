@@ -5,6 +5,8 @@ export { default as PublicRoutines } from './PublicRoutines';
 export { default as MyRoutines } from './MyRoutines';
 export { default as CreateRoutine } from './CreateRoutine';
 export { default as ViewRoutine } from './ViewRoutine';
+export { default as AttachActivity } from './AttachActivity';
+export { default as RoutineActivities } from './RoutineActivities';
 export { default as ActivityForm } from './CreateActivity';
 export { default as EditActivity } from './EditActivity';
 export { default as Navbar } from './NavBar';

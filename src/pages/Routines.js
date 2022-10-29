@@ -21,12 +21,11 @@ const Routines = ({ user, jwt, isLoggedIn }) => {
       fetchMyRoutines(user, jwt);
     }
   }, [user]);
-  // console.log(user);
 
   return (
     <>
       <Tabs
-        defaultActiveKey='public-routines'
+        defaultActiveKey={isLoggedIn ? 'my-routines' : 'public-routines'}
         justify='true'
         variant='pills'
         className='bg-dark'

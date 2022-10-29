@@ -9,6 +9,7 @@ import {
   Row,
   Col,
 } from 'react-bootstrap';
+import RoutineActivities from './RoutineActivities';
 
 const ViewRoutine = ({ routine }) => {
   const [showModal, setShowModal] = useState(false);
@@ -70,7 +71,11 @@ const ViewRoutine = ({ routine }) => {
             </Col>
           </Form.Group>
 
-          <Card
+          <RoutineActivities
+            // className='border-top border-bottom border-dark'
+            routine={routine}
+          />
+          {/* <Card
             id='attachedActivities'
             variant='flush'
             className='border-top border-bottom border-dark'>
@@ -102,7 +107,7 @@ const ViewRoutine = ({ routine }) => {
                 No activities found
               </Card.Title>
             )}
-          </Card>
+          </Card> */}
 
           <Form.Group className='m-3 d-flex justify-content-end'>
             <Button

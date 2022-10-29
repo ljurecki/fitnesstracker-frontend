@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Button, Card, FloatingLabel, Form, Alert } from 'react-bootstrap';
 import { updateRoutine } from '../api';
+import { AttachActivity, RoutineActivities } from '../components';
 
-const EditRoutine = ({ navigate, jwt }) => {
+const EditRoutine = ({ navigate, jwt, user }) => {
   const loc = useLocation();
   const { routine } = loc.state;
-  const { id, name, goal, isPublic } = routine;
+  const [currentRoutine, setCurrentRoutine] = useState(routine);
+  const { id, name, goal, isPublic } = currentRoutine;
   const [errorMessage, setErrorMessage] = useState('');
 
   const [newName, setNewName] = useState(name);
@@ -22,17 +24,21 @@ const EditRoutine = ({ navigate, jwt }) => {
     };
     const result = await updateRoutine(updatedRoutine, jwt);
     if (!result.error) {
+      setErrorMessage('');
       navigate('/routines');
     } else {
       console.error(result.error);
-      setErrorMessage(result.error); 
+      setErrorMessage(result.error);
     }
   };
 
   return (
     <>
       <Card className='flex-fill mt-3 mx-5 shadow'>
-        <Card.Header as='h3' className='text-center' style={{backgroundColor: "#0D6EFD", color: "#fff"}}>
+        <Card.Header
+          as='h3'
+          className='text-center'
+          style={{ backgroundColor: '#0D6EFD', color: '#fff' }}>
           Edit Routine
         </Card.Header>
         <Form
@@ -79,35 +85,27 @@ const EditRoutine = ({ navigate, jwt }) => {
           </Form.Group>
 
           <Form.Group className='m-3 d-flex justify-content-end'>
-            <Button variant='success' type='submit'>
-              Update Routine
+            <AttachActivity
+              routine={currentRoutine}
+              jwt={jwt}
+              user={user}
+              setCurrentRoutine={setCurrentRoutine}
+            />
+            <Button variant='success' type='submit' className='mx-2'>
+              Save & Exit
             </Button>
-            <Button
-              variant='secondary'
-              className='mx-2'
-              onClick={() => navigate('/routines')}>
+            {/* <Button variant='secondary' onClick={() => navigate('/routines')}>
               Cancel
-            </Button>
+            </Button> */}
           </Form.Group>
-          {
-                errorMessage ? (
-                    <>
-                        {[
-                            'danger',
-                        ].map((variant) => (
-                            <Alert key={variant} variant={variant}>
-                                Sorry, Routine Name Already Exists!
-                            </Alert>
-                        ))}
-
-                    </>
-
-                ) : (<></>)
-            }
+          {errorMessage && (
+            <Alert variant='danger'>Sorry, Routine Name Already Exists!</Alert>
+          )}
         </Form>
       </Card>
+
+      <RoutineActivities routine={currentRoutine} />
     </>
   );
 };
-
 export default EditRoutine;
