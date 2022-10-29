@@ -9,8 +9,12 @@ const CreateRoutine = ({ jwt }) => {
   const [goal, setGoal] = useState('');
   const [isPublic, setIsPublic] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
 
-  const openModal = () => setShowModal(true);
+  const openModal = () => {
+    setErrorMessage('');
+    setShowModal(true);
+  };
   const closeModal = () => {
     setShowModal(false);
     setName('');
@@ -26,10 +30,14 @@ const CreateRoutine = ({ jwt }) => {
     };
     const response = await createRoutine(routine, jwt);
     if (!response.error) {
-      closeModal();
+      setSuccessMessage('Routine Created!');
+      setTimeout(() => {
+        closeModal();;
+      }, 1000);
+
     } else {
       console.error(response.error);
-      setErrorMessage(response.error); 
+      setErrorMessage(response.error);
     }
   };
 
@@ -97,28 +105,17 @@ const CreateRoutine = ({ jwt }) => {
             <Button variant='success' type='submit'>
               Create Routine
             </Button>
-            {/* <Button
-              variant='secondary'
-              className='mx-2 justify-self-end'
-              onClick={() => closeModal()}>
-              Close
-            </Button> */}
           </Form.Group>
-          {
-                errorMessage ? (
-                    <>
-                        {[
-                            'danger',
-                        ].map((variant) => (
-                            <Alert key={variant} variant={variant}>
-                                Sorry, Routine Name Already Exists!
-                            </Alert>
-                        ))}
-
-                    </>
-
-                ) : (<></>)
-            }
+          {errorMessage && (
+            <Alert variant='danger' className='mt-3'>
+              Sorry, Routine Name Already Exists!
+            </Alert>
+          )}
+          {successMessage && (
+            <Alert variant='success' className='mt-3'>
+              {successMessage}
+            </Alert>
+          )}
         </Form>
       </Modal>
     </>

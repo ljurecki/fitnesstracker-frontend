@@ -21,7 +21,6 @@ const Routines = ({ user, jwt, isLoggedIn }) => {
       fetchMyRoutines(user, jwt);
     }
   }, [user]);
-  // console.log(user);
 
   return (
     <>
@@ -36,8 +35,6 @@ const Routines = ({ user, jwt, isLoggedIn }) => {
             publicRoutines={publicRoutines}
             isLoggedIn={isLoggedIn}
             user={user}
-            // jwt={jwt}
-            // navigate={navigate}
           />
         </Tab>
         {isLoggedIn && (
@@ -50,8 +47,6 @@ const Routines = ({ user, jwt, isLoggedIn }) => {
       {isLoggedIn && (
         <CreateRoutine
           jwt={jwt}
-          // fetchPosts={fetchPosts}
-          // fetchMyPosts={fetchMyPosts}
         />
       )}
     </>

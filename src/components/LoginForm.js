@@ -19,11 +19,9 @@ const LoginForm = ({ navigate, setJwt }) => {
       }
     } else {
       console.error(result.error);
-      setErrorMessage(result.error)
+      setErrorMessage(result.error);
     }
   };
-
-
 
   return (
     <Form
@@ -31,7 +29,7 @@ const LoginForm = ({ navigate, setJwt }) => {
         e.preventDefault();
         loginUser();
       }}>
-      <Form.Group className='mb-3' style={{ margin: "3% 25% 0px 25%" }}>
+      <Form.Group className='mb-3' style={{ margin: '3% 25% 0px 25%' }}>
         <Form.Control
           placeholder='Username'
           onChange={e => {
@@ -40,7 +38,7 @@ const LoginForm = ({ navigate, setJwt }) => {
         />
       </Form.Group>
 
-      <Form.Group className='mb-3' style={{ margin: "2% 25% 0px 25%" }}>
+      <Form.Group className='mb-3' style={{ margin: '2% 25% 0px 25%' }}>
         <Form.Control
           type='password'
           placeholder='Password'
@@ -49,36 +47,26 @@ const LoginForm = ({ navigate, setJwt }) => {
           }}
         />
       </Form.Group>
-      <Form.Group style={{ margin: "2% 25% 0px 25%" }}>
-        <Button variant='success'
+      <Form.Group style={{ margin: '2% 25% 0px 25%' }}>
+        <Button
+          variant='success'
           type='submit'
           className='mx-2 justify-self-end'>
           Submit
         </Button>
-        <Button variant='primary'
+        <Button
+          variant='primary'
           className='mx-2 justify-self-end'
-          onClick={() =>
-            navigate('/register')}>
+          onClick={() => navigate('/register')}>
           Register
         </Button>
+        {errorMessage && (
+          <Alert variant='danger' className='mt-3'>
+            {errorMessage}
+          </Alert>
+        )}
       </Form.Group>
-      {
-        errorMessage ? (
-          <>
-            {[
-              'danger',
-            ].map((variant) => (
-              <Alert key={variant} variant={variant}>
-                Username or Password is Incorrect. Please Try Again!
-              </Alert>
-            ))}
-
-          </>
-
-        ) : (<></>)
-      }
     </Form>
-
   );
 };
 

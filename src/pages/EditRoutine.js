@@ -8,6 +8,7 @@ const EditRoutine = ({ navigate, jwt }) => {
   const { routine } = loc.state;
   const { id, name, goal, isPublic } = routine;
   const [errorMessage, setErrorMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
 
   const [newName, setNewName] = useState(name);
   const [newGoal, setNewGoal] = useState(goal);
@@ -22,17 +23,20 @@ const EditRoutine = ({ navigate, jwt }) => {
     };
     const result = await updateRoutine(updatedRoutine, jwt);
     if (!result.error) {
-      navigate('/routines');
+      setSuccessMessage('Routine Updated!');
+      setTimeout(() => {
+        navigate('/routines');
+      }, 1000);
     } else {
       console.error(result.error);
-      setErrorMessage(result.error); 
+      setErrorMessage(result.error);
     }
   };
 
   return (
     <>
       <Card className='flex-fill mt-3 mx-5 shadow'>
-        <Card.Header as='h3' className='text-center' style={{backgroundColor: "#0D6EFD", color: "#fff"}}>
+        <Card.Header as='h3' className='text-center' style={{ backgroundColor: "#0D6EFD", color: "#fff" }}>
           Edit Routine
         </Card.Header>
         <Form
@@ -89,21 +93,16 @@ const EditRoutine = ({ navigate, jwt }) => {
               Cancel
             </Button>
           </Form.Group>
-          {
-                errorMessage ? (
-                    <>
-                        {[
-                            'danger',
-                        ].map((variant) => (
-                            <Alert key={variant} variant={variant}>
-                                Sorry, Routine Name Already Exists!
-                            </Alert>
-                        ))}
-
-                    </>
-
-                ) : (<></>)
-            }
+                {errorMessage && (
+                  <Alert variant='danger' className='mt-3'>
+                    {errorMessage}
+                  </Alert>
+                )}
+                {successMessage && (
+                  <Alert variant='success' className='mt-3'>
+                    {successMessage}
+                  </Alert>
+                )}
         </Form>
       </Card>
     </>
