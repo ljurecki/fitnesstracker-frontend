@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { Card, ListGroup, Row, Col } from 'react-bootstrap';
+import React from 'react';
+import { Card, ListGroup, Row, Col, Button } from 'react-bootstrap';
+import { deleteRoutineActivity } from '../api';
 
-const RoutineActivities = ({ routine }) => {
+const RoutineActivities = ({ routine, jwt }) => {
   // const [parsedActivities, setParsedActivities] = useState(routine.activities);
 
   // const parseActivities = () => {
@@ -11,6 +12,11 @@ const RoutineActivities = ({ routine }) => {
   // useEffect(() => {
   //   parseActivities();
   // }, [routine.activities]);
+
+  const handleDelete = async routineActivityId => {
+    const result = await deleteRoutineActivity(routineActivityId, jwt);
+    console.log(result);
+  };
 
   return (
     <Card
@@ -23,17 +29,35 @@ const RoutineActivities = ({ routine }) => {
       {routine.activities && routine.activities.length ? (
         <ListGroup id='attachedActivitiesContainer'>
           {routine.activities.map(activity => {
-            const { id, name, description, count, duration } = activity;
+            const {
+              id,
+              name,
+              description,
+              count,
+              duration,
+              routineActivityId,
+            } = activity;
             return (
               <ListGroup.Item key={id} className='m-1'>
                 <Card.Title>Name: {name}</Card.Title>
                 <Card.Text>Description: {description}</Card.Text>
-                <Row>
+                <Row className='d-flex align-items-center'>
                   <Col>
                     <Card.Text>Count: {count}</Card.Text>
                   </Col>
                   <Col>
                     <Card.Text>Duration: {duration}</Card.Text>
+                  </Col>
+                  <Col className='flex-grow-0'>
+                    <Button
+                      variant='danger'
+                      onClick={() => {
+                        if (confirm('Are you sure you want to delete?')) {
+                          handleDelete(routineActivityId);
+                        }
+                      }}>
+                      Delete
+                    </Button>
                   </Col>
                 </Row>
               </ListGroup.Item>

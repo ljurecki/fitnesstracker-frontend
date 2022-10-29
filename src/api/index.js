@@ -135,6 +135,18 @@ export const deleteRoutine = async (routine, jwt) => {
   }
 };
 
+export const deleteRoutineActivity = async (routineActivityId, jwt) => {
+  try {
+    const headers = createHeaders(jwt);
+    return await fetch(`${BASE_URL}/routine_activities/${routineActivityId}`, {
+      method: 'DELETE',
+      headers,
+    }).then(response => response.json());
+  } catch (err) {
+    console.errror(err);
+  }
+};
+
 export const attachActivity = async (activity, routine, jwt) => {
   try {
     const headers = createHeaders(jwt);

@@ -1,6 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { Button, Card, FloatingLabel, Form, Alert } from 'react-bootstrap';
+import {
+  Button,
+  Card,
+  FloatingLabel,
+  Form,
+  Alert,
+  Container,
+} from 'react-bootstrap';
 import { updateRoutine } from '../api';
 import { AttachActivity, RoutineActivities } from '../components';
 
@@ -37,7 +44,7 @@ const EditRoutine = ({ navigate, jwt, user }) => {
 
   return (
     <>
-      <Card className='flex-fill mt-3 mx-5 shadow'>
+      <Card className='flex-fill mt-3 mx-4 shadow'>
         <Card.Header
           as='h3'
           className='text-center'
@@ -111,7 +118,9 @@ const EditRoutine = ({ navigate, jwt, user }) => {
         </Form>
       </Card>
 
-      <RoutineActivities routine={currentRoutine} />
+      <div className='p-0 mt-4 mx-4 shadow'>
+        <RoutineActivities routine={currentRoutine} jwt={jwt} />
+      </div>
     </>
   );
 };
