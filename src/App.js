@@ -52,17 +52,13 @@ const App = () => {
       </div>
       <Container className='px-0' fluid id='main-app'>
         <Routes>
-          <Route path='/' element={<Home id='Home' /* user={user} */ />} />
+          <Route
+            path='/'
+            element={<Home id='Home' />}
+          />
           <Route
             path='/routines'
-            element={
-              <Routines
-                user={user}
-                jwt={jwt}
-                isLoggedIn={isLoggedIn}
-                // navigate={navigate}
-              />
-            }
+            element={<Routines user={user} jwt={jwt} isLoggedIn={isLoggedIn} />}
           />
           <Route
             path='/routines/:routineId'
@@ -76,7 +72,10 @@ const App = () => {
             path='/activities/:activityId'
             element={<UpdateActivity jwt={jwt} navigate={navigate} />}
           />
-          <Route path='/register' element={<Register navigate={navigate} />} />
+          <Route
+            path='/register'
+            element={<Register navigate={navigate} />}
+          />
           <Route
             path='/login'
             element={<Login setJwt={setJwt} navigate={navigate} />}
