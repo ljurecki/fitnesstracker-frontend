@@ -209,3 +209,14 @@ export const updateActivity = async (jwt, { id, name, description }) => {
     console.error(err);
   }
 };
+
+export const getRoutinesByActivity = async ({ id }) => {
+  try {
+    const headers = createHeaders();
+    return await fetch(`${BASE_URL}/activities/${id}/routines`, {
+      headers,
+    }).then(response => response.json());
+  } catch (err) {
+    console.error(err);
+  }
+};

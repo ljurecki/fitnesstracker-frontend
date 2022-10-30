@@ -1,4 +1,6 @@
-#attachedActivities {
+#attachedActivities,
+#relatedRoutinesModal,
+#creatorRelatedRoutinesModal {
   max-height: 30rem;
 }
 
@@ -8,4 +10,10 @@
 
 .nav-link:hover {
   color: #fff !important;
+}
+
+.activityLink:hover,
+.routineCreatorLink:hover {
+  color: gray;
+  cursor: pointer;
 }
