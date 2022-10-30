@@ -168,11 +168,7 @@ const AttachActivity = ({ routine, jwt, updateCurrentRoutine }) => {
             </Button>
           </Form.Group>
         </Form>
-        {errorMessage && (
-          <Alert variant='danger'>
-            {errorMessage}
-          </Alert>
-        )}
+        {errorMessage && <Alert variant='danger'>{errorMessage}</Alert>}
         {successMessage && (
           <Alert variant='success' className='mt-3'>
             {successMessage}

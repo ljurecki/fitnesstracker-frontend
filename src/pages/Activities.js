@@ -22,16 +22,13 @@ const Activities = ({ jwt, user }) => {
         variant='pills'
         className='bg-dark'
         style={{ fontSize: '25px' }}>
-        <Tab eventKey="activities" title="Activity"></Tab>
+        <Tab eventKey='activities' title='Activity'></Tab>
       </Tabs>
-      
-      <ListGroup variant='flush'>
-        {jwt && (
-          <ActivityForm user={user} jwt={jwt} />
-        )}
 
-        {
-          activitiesToDisplay ? (
+      <ListGroup variant='flush'>
+        {jwt && <ActivityForm user={user} jwt={jwt} />}
+
+        {activitiesToDisplay ? (
           activitiesToDisplay.map(activity => {
             const { id, name, description } = activity;
             return (

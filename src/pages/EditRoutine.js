@@ -18,7 +18,7 @@ const EditRoutine = ({ navigate, jwt, user }) => {
 
   const updateCurrentRoutine = async () => {
     const updatedRoutines = await getRoutinesByUsername(user, jwt);
-    const [_updatedRoutine] = updatedRoutines.filter(
+    const [_updatedRoutine] = await updatedRoutines.filter(
       _routine => _routine.id === routine.id
     );
     setCurrentRoutine(_updatedRoutine);
@@ -100,9 +100,7 @@ const EditRoutine = ({ navigate, jwt, user }) => {
             <AttachActivity
               routine={currentRoutine}
               jwt={jwt}
-              // user={user}
               updateCurrentRoutine={updateCurrentRoutine}
-              // setCurrentRoutine={setCurrentRoutine}
             />
             <Button variant='success' type='submit' className='mx-2'>
               Save & Exit

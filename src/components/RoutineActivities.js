@@ -28,6 +28,7 @@ const RoutineActivities = ({ routine, jwt, updateCurrentRoutine, user }) => {
     } else {
       const result = await updateRoutineActivity({ count, duration, id }, jwt);
       if (!result.error) {
+        await updateCurrentRoutine();
         return true;
       } else {
         console.error(result.error);
@@ -55,20 +56,35 @@ const RoutineActivities = ({ routine, jwt, updateCurrentRoutine, user }) => {
       </ListGroup.Item>
       {routine.activities && routine.activities.length ? (
         <ListGroup id='attachedActivitiesContainer'>
-          {routine.activities.map(activity => {
-            const {
-              id,
-              name,
-              description,
-              count,
-              duration,
-              routineActivityId,
-            } = activity;
+          {routine.activities.map((activity, index) => {
+            const { id, name, description, routineActivityId } = activity;
+            let { count, duration } = activity;
 
-            const [currentCount, setCurrentCount] = useState(count);
-            const [currentDuration, setCurrentDuration] = useState(duration);
-            const [toggleEdit, setToggleEdit] = useState(true);
-            const toggleFields = () => setToggleEdit(!toggleEdit);
+            const countElementId = 'routineCount' + index;
+            const durationElementId = 'routineDuration' + index;
+            const editButtonId = 'EditButton' + index;
+            const saveButtonId = 'SaveButton' + index;
+            let blockEdits = true;
+
+            const toggleFields = () => {
+              const countField = document.getElementById(countElementId);
+              const durationField = document.getElementById(durationElementId);
+              const editButton = document.getElementById(editButtonId);
+              const saveButton = document.getElementById(saveButtonId);
+
+              blockEdits = !blockEdits;
+              countField.readOnly = blockEdits;
+              durationField.readOnly = blockEdits;
+              if (blockEdits) {
+                countField.classList = 'form-control-plaintext';
+                durationField.classList = 'form-control-plaintext';
+              } else {
+                countField.classList = 'form-control';
+                durationField.classList = 'form-control';
+              }
+              editButton.hidden = !blockEdits;
+              saveButton.hidden = blockEdits;
+            };
 
             return (
               <ListGroup.Item key={id} className='m-1'>
@@ -78,57 +94,56 @@ const RoutineActivities = ({ routine, jwt, updateCurrentRoutine, user }) => {
                   <Col className='p-0'>
                     <FloatingLabel label='Count'>
                       <Form.Control
-                        id='routineActivityCount'
+                        id={countElementId}
                         placeholder='Count'
-                        plaintext={toggleEdit}
-                        disabled={toggleEdit}
+                        plaintext={blockEdits}
+                        readOnly={blockEdits}
                         required
-                        onChange={e => setCurrentCount(e.target.value)}
-                        value={currentCount}
+                        onChange={e => (count = e.target.value)}
+                        defaultValue={count}
                       />
                     </FloatingLabel>
                   </Col>
                   <Col className='p-0'>
                     <FloatingLabel label='Duration'>
                       <Form.Control
-                        id='routineActivityDuration'
+                        id={durationElementId}
                         placeholder='Duration'
-                        plaintext={toggleEdit}
-                        disabled={toggleEdit}
+                        plaintext={blockEdits}
+                        readOnly={blockEdits}
                         required
-                        onChange={e => setCurrentDuration(e.target.value)}
-                        value={currentDuration}
+                        onChange={e => (duration = e.target.value)}
+                        defaultValue={duration}
                       />
                     </FloatingLabel>
                   </Col>
                   <Col className='d-flex justify-content-end flex-grow-0'>
                     {user && routine.creatorName === user.username && (
                       <>
-                        {toggleEdit ? (
-                          <Button
-                            variant='info'
-                            id='EditButton'
-                            type='button'
-                            onClick={() => toggleFields()}>
-                            Edit
-                          </Button>
-                        ) : (
-                          <Button
-                            variant='success'
-                            id='SaveButton'
-                            onClick={async () => {
-                              const response = await handleUpdate(
-                                currentCount,
-                                currentDuration,
-                                routineActivityId
-                              );
-                              if (response) {
-                                toggleFields();
-                              }
-                            }}>
-                            Save
-                          </Button>
-                        )}
+                        <Button
+                          variant='info'
+                          id={editButtonId}
+                          type='button'
+                          hidden={!blockEdits}
+                          onClick={() => toggleFields()}>
+                          Edit
+                        </Button>
+                        <Button
+                          variant='success'
+                          id={saveButtonId}
+                          hidden={blockEdits}
+                          onClick={async () => {
+                            const response = await handleUpdate(
+                              count,
+                              duration,
+                              routineActivityId
+                            );
+                            if (response) {
+                              toggleFields();
+                            }
+                          }}>
+                          Save
+                        </Button>
                         <Button
                           variant='danger'
                           className='ms-2'
