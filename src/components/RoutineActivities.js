@@ -7,19 +7,13 @@ import {
   Button,
   Form,
   FloatingLabel,
+  Alert
 } from 'react-bootstrap';
 import { updateRoutineActivity, deleteRoutineActivity } from '../api';
 
+
+
 const RoutineActivities = ({ routine, jwt, updateCurrentRoutine, user }) => {
-  // const [parsedActivities, setParsedActivities] = useState(routine.activities);
-
-  // const parseActivities = () => {
-  //   setParsedActivities(routine.activities.map(activity => activity));
-  // };
-
-  // useEffect(() => {
-  //   parseActivities();
-  // }, [routine.activities]);
 
   const handleUpdate = async (count, duration, id) => {
     if (!count || !duration) {
@@ -64,7 +58,10 @@ const RoutineActivities = ({ routine, jwt, updateCurrentRoutine, user }) => {
             const durationElementId = 'routineDuration' + index;
             const editButtonId = 'EditButton' + index;
             const saveButtonId = 'SaveButton' + index;
+            const routineActivityErrorId = 'routineActivityError' + index;
             let blockEdits = true;
+
+            const routineActivityError = document.getElementById(routineActivityErrorId);
 
             const toggleFields = () => {
               const countField = document.getElementById(countElementId);
@@ -140,6 +137,11 @@ const RoutineActivities = ({ routine, jwt, updateCurrentRoutine, user }) => {
                             );
                             if (response) {
                               toggleFields();
+                              routineActivityError.innerText = '';
+                              routineActivityError.hidden = true;
+                            } else {
+                              routineActivityError.innerText = 'Please set a count and duration for this activity';
+                              routineActivityError.hidden = false;
                             }
                           }}>
                           Save
@@ -157,8 +159,11 @@ const RoutineActivities = ({ routine, jwt, updateCurrentRoutine, user }) => {
                       </>
                     )}
                   </Col>
+                  <Alert variant='danger' hidden={blockEdits} id={routineActivityErrorId}></Alert>
                 </Row>
+
               </ListGroup.Item>
+
             );
           })}
         </ListGroup>
