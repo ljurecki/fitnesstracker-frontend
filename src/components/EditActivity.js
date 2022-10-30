@@ -24,7 +24,7 @@ const EditActivity = ({ jwt, navigate }) => {
         console.log(result)
         if (result.error) {
             console.error(result.error);
-            setErrorMessage(result.error);
+            setErrorMessage('Activity with this Name Already Exists!');
         } else {
             setSuccessMessage('Activity Updated!');
             setErrorMessage('');

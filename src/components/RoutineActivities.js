@@ -159,7 +159,7 @@ const RoutineActivities = ({ routine, jwt, updateCurrentRoutine, user }) => {
                       </>
                     )}
                   </Col>
-                  <Alert variant='danger' hidden={blockEdits} id={routineActivityErrorId}></Alert>
+                  <Alert variant='danger' hidden={blockEdits} id={routineActivityErrorId}> </Alert>
                 </Row>
 
               </ListGroup.Item>

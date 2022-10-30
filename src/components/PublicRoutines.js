@@ -28,16 +28,6 @@ const PublicRoutines = ({
   return (
     <>
       <ListGroup variant='flush'>
-        {/* <InputGroup className='p-2 text-white bg-dark'>
-            <Form.Control
-              placeholder='Search Posts'
-              onChange={e => setSearchTerm(e.target.value)}
-              value={searchTerm}
-            />
-            <Button variant='info' onClick={() => setSearchTerm('')}>
-              Clear
-            </Button>
-          </InputGroup> */}
         {publicRoutines && publicRoutines.length ? (
           publicRoutines.map(routine => {
             const { id, creatorName, name, goal } = routine;
