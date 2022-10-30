@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   Card,
   ListGroup,
@@ -7,14 +7,11 @@ import {
   Button,
   Form,
   FloatingLabel,
-  Alert
+  Alert,
 } from 'react-bootstrap';
 import { updateRoutineActivity, deleteRoutineActivity } from '../api';
 
-
-
 const RoutineActivities = ({ routine, jwt, updateCurrentRoutine, user }) => {
-
   const handleUpdate = async (count, duration, id) => {
     if (!count || !duration) {
       console.error('Please set a count and duration for this activity');
@@ -61,7 +58,9 @@ const RoutineActivities = ({ routine, jwt, updateCurrentRoutine, user }) => {
             const routineActivityErrorId = 'routineActivityError' + index;
             let blockEdits = true;
 
-            const routineActivityError = document.getElementById(routineActivityErrorId);
+            const routineActivityError = document.getElementById(
+              routineActivityErrorId
+            );
 
             const toggleFields = () => {
               const countField = document.getElementById(countElementId);
@@ -87,6 +86,7 @@ const RoutineActivities = ({ routine, jwt, updateCurrentRoutine, user }) => {
               <ListGroup.Item key={id} className='m-1'>
                 <Card.Title>Name: {name}</Card.Title>
                 <Card.Text>Description: {description}</Card.Text>
+
                 <Row className='d-flex align-items-center'>
                   <Col className='p-0'>
                     <FloatingLabel label='Count'>
@@ -101,7 +101,7 @@ const RoutineActivities = ({ routine, jwt, updateCurrentRoutine, user }) => {
                       />
                     </FloatingLabel>
                   </Col>
-                  <Col className='p-0'>
+                  <Col className='p-0 ms-3'>
                     <FloatingLabel label='Duration'>
                       <Form.Control
                         id={durationElementId}
@@ -137,11 +137,12 @@ const RoutineActivities = ({ routine, jwt, updateCurrentRoutine, user }) => {
                             );
                             if (response) {
                               toggleFields();
-                              routineActivityError.innerText = '';
                               routineActivityError.hidden = true;
+                              routineActivityError.innerText = '';
                             } else {
-                              routineActivityError.innerText = 'Please set a count and duration for this activity';
                               routineActivityError.hidden = false;
+                              routineActivityError.innerText =
+                                'Please set a count and duration for this activity';
                             }
                           }}>
                           Save
@@ -159,11 +160,13 @@ const RoutineActivities = ({ routine, jwt, updateCurrentRoutine, user }) => {
                       </>
                     )}
                   </Col>
-                  <Alert variant='danger' hidden={blockEdits} id={routineActivityErrorId}></Alert>
+                  <Alert
+                    variant='danger'
+                    hidden={blockEdits}
+                    id={routineActivityErrorId}
+                    className='mb-0 mt-2'></Alert>
                 </Row>
-
               </ListGroup.Item>
-
             );
           })}
         </ListGroup>

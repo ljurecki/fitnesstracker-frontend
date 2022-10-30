@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { login } from '../api';
-import { Form, Button, Alert, Modal } from 'react-bootstrap';
+import { Form, Button, Alert } from 'react-bootstrap';
 
 const LoginForm = ({ navigate, setJwt }) => {
   const [username, setUsername] = useState('');
